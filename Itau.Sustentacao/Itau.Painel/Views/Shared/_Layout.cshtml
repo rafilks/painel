@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Aplicação Slides</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="bg-dark">
+    <header>      
+        <nav class="navbar navbar-dark">
+            <img class="img-fluid w-100" src="@ViewBag.bannerEquipe" />            
+        </nav>
+    </header>
+    <div class="body-content container-fluid fundo-painel">
+        @RenderBody()
+    </div>
+    <footer>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

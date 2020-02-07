@@ -1,0 +1,76 @@
+﻿@using Itau.Models;
+@model Itau.Models.Slide
+
+<div class="gestao-conteudo row m-0">
+    <div class="esquerda col-md-6 p-0">
+        <div class="nosso-time pb-3">
+            <div class="titulo text-center text-white p-3">
+                <h4>Nosso <span class="laranja-itau">Time</span></h4>
+            </div>
+
+            <div class="d-flex flex-wrap">
+                @foreach (var item in Model.NossoTime)
+                {
+                    <div class="nosso-time-item">
+                        <img src="@item.UrlImagem" class="w-100" />
+                        <div class="ausencia @item.Ausencia"></div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="ausencia-programada">
+            <div class="titulo text-center text-white p-3">
+                <h4>Ausências <span class="laranja-itau">Programadas</span></h4>
+            </div>
+            <div class="d-flex flex-wrap">
+
+                @for (int i = 0; i < Model.AusenciaProgramada.Count; i++)
+                {
+                    <div class="ausencia-programada-item @(i % 2 == 0 ? "" : "alternado")">
+                        <strong>
+                            <span class="item-data laranja-itau">@Model.AusenciaProgramada[i].Data.ToString("dd/MM")</span>
+                            <span class="item-nome pl-3" style="color:white">@Model.AusenciaProgramada[i].Nome<text>(</text>@Model.AusenciaProgramada[i].Motivo<text>)</text></span>
+                        </strong>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="direita col-md-6 p-0">
+        <div class="ferias pb-3 pl-3">
+            <div class="titulo text-center text-white p-3">
+                <h4>Férias <span class="laranja-itau">| Próximos 90 dias</span></h4>
+            </div>
+            <div class="grid-ferias">
+                <img src="~/Dados/@ViewBag.equipe/Imagens/ferias-grid.jpg" class="img-fluid w-100" />  
+            </div>
+        </div>
+        <div class="plantao row">
+            <div class="plantao-titulo col-md-3">
+                <div class="vertical ">
+                    <div class="titutlo laranja-itau"><h4>Plantão</h4></div>
+                    <div class="periodo"><span>@ViewBag.inicioSemana.ToString("dd/MM") a @ViewBag.fimSemana.ToString("dd/MM")</span></div>
+                </div>
+            </div>
+            <div class="plantao-conteudo col-md-9 mt-3 pr-5">
+                <div class="list-group">
+                    @foreach (var item in Model.DadosPlantao)
+                    {
+                        if (item.PlantaoHoje == true)
+                        {
+                    <div class="list-group-item w-100 bg-transparent border-0">
+                        <div class="d-flex w-100 justify-content-center laranja-itau font-weight-bold">
+                            <span>@item.Plataforma</span>                           
+                        </div>
+                        <div class="d-flex w-100 justify-content-center text-white">                          
+                            <h5 class="mb-1">@item.Funcionario</h5>
+                        </div>
+                    </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+﻿@using Itau.Models;
+@{
+    ViewBag.Title = "Slides";    
+}
+@model List<Itau.Models.Slide>
+
+@if (!string.IsNullOrEmpty(ViewBag.mensagemErro))
+{
+    <div class="alert alert-danger" role="alert">
+       @ViewBag.mensagemErro
+    </div>
+}
+
+<div id="carouselSlides" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false">
+    <div class="carousel-inner">
+        @{int cont = 1;}
+        @foreach (var item in Model)
+        {
+
+            switch (item.Tipo)
+            {
+                case TipoSlide.Imagem:
+                    {
+                        if (cont == 1)
+                        {
+                            <div class="carousel-item active" data-interval="@item.Tempo">
+                                <img class="d-block w-100" src="@item.Conteudo" alt="@item.Nome">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item" data-interval="@item.Tempo">
+                                <img class="d-block w-100" src="@item.Conteudo" alt="@item.Nome">
+                            </div>
+                        }
+
+                        break;
+                    }
+                case TipoSlide.Video:
+                    {
+                        if (cont == 1)
+                        {
+                            <div class="carousel-item active" data-interval="@item.Tempo">
+                                <video id="video-@item.Id" muted>
+                                    <source src="@item.Conteudo" type="video/mp4" />
+                                </video>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item" data-interval="@item.Tempo">
+                                <video id="video-@item.Id" class="video-fluid" muted>
+                                    <source src="@item.Conteudo" type="video/mp4" alt="@item.Nome" />
+                                </video>
+                            </div>
+                        }
+                        break;
+                    }
+
+                case TipoSlide.GestaoVisual:
+                    {
+                        if (cont == 1)
+                        {
+                            <div class="carousel-item active" data-interval="@item.Tempo">
+                                @Html.Partial("GestaoVisual", item)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item" data-interval="@item.Tempo">
+                                @Html.Partial("GestaoVisual", item)
+                            </div>
+                        }
+
+                        break;
+                    }
+                case TipoSlide.Literal:
+                    {
+                        if (cont == 1)
+                        {
+                            <div class="carousel-item active" data-interval="@item.Tempo">
+                                <div class="conteudo-literal">
+                                    @Html.Raw(item.Conteudo);
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="carousel-item" data-interval="@item.Tempo">
+                                <div class="conteudo-literal">
+                                    @Html.Raw(item.Conteudo);
+                                </div>
+                            </div>
+                        }
+                        break;
+                    }
+
+                case TipoSlide.Embed:
+                    {
+                        <div class="carousel-item" data-interval="@item.Tempo">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <embed class="embed-responsive-item" src="@item.Conteudo" />
+                            </div>
+                        </div>
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+            cont++;
+        }
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //Ao finalizar a troca do slide
+            $('#carouselSlides').on('slid.bs.carousel', function () {
+                var video = $('.carousel-item.active').find("video");
+                if (video.length > 0) {                  
+                    video.get(0).play();                   
+                }
+            })
+
+            //Antes de iniciar a troca de slide
+            $('#carouselSlides').on('slide.bs.carousel', function () {
+                var video = $('.carousel-item.active').find("video");
+                if (video.length > 0) {
+                    video.get(0).pause();
+                    video.get(0).currentTime = 0;
+                }
+            })          
+        });
+
+    </script>
+
+}

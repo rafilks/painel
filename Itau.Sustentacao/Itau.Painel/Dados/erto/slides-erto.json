@@ -1,0 +1,83 @@
+[
+  {
+    "Id": 1,
+    "Equipe": "erto",
+    "Nome": "Gestão Visual",
+    "Tipo": 4,
+    "Tempo": 10000,
+    "NossoTime": [
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": "ferias"
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": ""
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": "maternidade"
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": ""
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": "maternidade"
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": ""
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": ""
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": "ferias"
+      },
+      {
+        "UrlImagem": "/Dados/erto/Slides/rafael-santos.png",
+        "Ausencia": ""
+      }
+    ],
+    "AusenciaProgramada": [
+      {
+        "Nome": "Rafael",
+        "Motivo": "compensação",
+        "Data": "21-01-2020"
+      },
+      {
+        "Nome": "Thiago",
+        "Motivo": "compensação",
+        "Data": "27-01-2020"
+      },
+      {
+        "Nome": "Andre",
+        "Motivo": "compensação",
+        "Data": "02-01-2020"
+      },
+      {
+        "Nome": "Gabriel",
+        "Motivo": "Licença",
+        "Data": "20-01-2020"
+      }
+    ],
+    "DadosPlantao": [
+      {
+        "Funcionario": "Cesar | Renato",
+        "DataInicio": "03-02-2020",
+        "DataFim": "10-02-2020",
+        "Plataforma":  "PRC | URA"
+      },
+      {
+        "Funcionario": "Jonas | Breda",
+        "DataInicio": "01-01-2020",
+        "DataFim": "24-01-2020",
+        "Plataforma": "WF | OD5 | Outros"
+      }
+    ]
+  }
+]

@@ -1,0 +1,100 @@
+﻿.navbar {
+    height: 80px;
+    background-color: black;
+}
+
+
+#carouselSlides video {
+    min-height: 100% !important;
+    min-width: 100% !important;
+    height: auto !important;
+    width: auto !important;
+    overflow: hidden;
+}
+
+/*.gestao-conteudo {
+    min-height: 688px;
+    height:100%;
+}*/
+
+.gestao-conteudo .esquerda {
+    border-right: 3px solid black;
+    /*padding: 0px !important;
+        margin: 0px !important;*/
+}
+
+.gestao-conteudo .nosso-time {
+    border-bottom: 3px solid black;
+}
+
+.gestao-conteudo .nosso-time .nosso-time-item{
+    width: 218px;
+    padding-right:5px;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+.gestao-conteudo .nosso-time .nosso-time-item .ausencia{
+    position:absolute;
+    width: 32px;
+    height: 32px;
+    top:5px;
+    right:10px;
+}
+
+.gestao-conteudo .nosso-time .nosso-time-item .ausencia.maternidade{
+     background: url('../Imagens/baby.png') center no-repeat;
+}
+
+.gestao-conteudo .nosso-time .nosso-time-item .ausencia.ferias {   
+    background: url('../Imagens/ferias.png') center no-repeat;
+}
+
+.ausencia-programada {
+    min-height:300px;
+}
+
+.ausencia-programada .ausencia-programada-item{
+    width: 300px;  
+    line-height:50px;
+    padding-left:10px;
+}
+
+.ausencia-programada .ausencia-programada-item.alternado{
+    padding-left:40px;
+    border-left: 2px white solid;
+}
+
+
+.gestao-conteudo .direita .ferias {
+    border-bottom: 3px solid black;
+    position: relative;
+}
+
+.gestao-conteudo .direita .grid-ferias img {
+    width:796px;
+    height: 364px;
+}
+
+.gestao-conteudo .direita .plantao .plantao-titulo{
+    margin-top:65px;
+}
+.gestao-conteudo .direita .plantao .vertical {
+    width: 130px;
+    height: 50px;
+    -ms-transform: rotate(270deg); /* IE 9 */
+    -moz-transform: rotate(270deg); /* Firefox */
+    -webkit-transform: rotate(270deg); /* Safari and Chrome */
+    -o-transform: rotate(270deg); /* Opera */
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.laranja-itau {
+   color: #ff6600;
+}
+
+.fundo-painel {
+    background-color: #252525;
+}
