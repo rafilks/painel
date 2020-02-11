@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Gerenciar Slides";
+}
+
+<link href="~/Content/jsoneditor/jsoneditor.min.css" rel="stylesheet" type="text/css">
+<script src="~/Scripts/jsoneditor/jsoneditor.min.js"></script>
+
+
+@if (!string.IsNullOrEmpty(ViewBag.mensagemErro))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.mensagemErro
+    </div>
+}
+<div id="json-container" class="bg-light"></div>
+
+<div class="botoes-salvar mt-0">
+    <button type="button" class="btn btn-outline-primary mt-3 mb-3" onclick="getJSON()">Salvar</button>
+</div>
+
+
+<script>
+    // create the editor
+    var container = document.getElementById("json-container");
+    var editor = new JSONEditor(container);
+
+    var json = @Html.Raw(@ViewBag.conteudoJson)   
+
+    editor.set(json);
+    
+    // get json
+    function getJSON() {
+        var json = editor.get();
+        alert(JSON.stringify(json, null, 2));
+
+        $.ajax({
+                type: "POST",
+                url: '/gerenciarpainel/salvarjson/ert',
+                contentType: "application/json",
+                dataType: "JSON",
+                async: false,
+                data: JSON.stringify(json),
+                success: function (data) {
+                    if (data) {
+                        if (data.success == true) {
+                            console.info(data);                           
+                        } else {
+                          
+                        } 
+                    }
+                            
+                },
+                fail: function (data) {
+                    console.error(data);                                            
+                }
+            });
+
+
+    }
+</script>
+
+

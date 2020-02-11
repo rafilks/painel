@@ -138,6 +138,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Controllers\GerenciarPainelController.cs" />
     <Compile Include="Controllers\PainelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -153,6 +154,9 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jsoneditor\img\jsoneditor-icons.png" />
+    <Content Include="Content\jsoneditor\jsoneditor.css" />
+    <Content Include="Content\jsoneditor\jsoneditor.min.css" />
     <Content Include="Imagens\baby.png" />
     <Content Include="Dados\erto\Imagens\ferias-grid.jpg" />
     <Content Include="Imagens\ferias.png" />
@@ -190,6 +194,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Dados\erto\slides-erto.json" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -202,6 +207,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsoneditor\jsoneditor.js" />
+    <Content Include="Scripts\jsoneditor\jsoneditor.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -297,6 +304,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Painel\GestaoVisual.cshtml" />
+    <Content Include="Views\GerenciarPainel\index.cshtml" />
+    <Content Include="Scripts\jsoneditor\jsoneditor.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
