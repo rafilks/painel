@@ -11,7 +11,7 @@
     </div>
 }
 
-<div id="carouselSlides" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false">
+<div id="carouselSlides" class="carousel slide carousel-fade" data-pause="false">
     <div class="carousel-inner">
         @{int cont = 1;}
         @foreach (var item in Model)
@@ -41,7 +41,7 @@
                         if (cont == 1)
                         {
                             <div class="carousel-item active" data-interval="@item.Tempo">
-                                <video id="video-@item.Id" muted>
+                                <video id="video-@item.Id" muted autoplay>
                                     <source src="@item.Conteudo" type="video/mp4" />
                                 </video>
                             </div>
@@ -120,6 +120,8 @@
 
         $(document).ready(function () {
 
+            $("#carouselSlides").carousel("cycle");           
+
             //Ao finalizar a troca do slide
             $('#carouselSlides').on('slid.bs.carousel', function () {
                 var video = $('.carousel-item.active').find("video");
@@ -139,5 +141,4 @@
         });
 
     </script>
-
 }

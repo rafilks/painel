@@ -31,7 +31,6 @@
     // get json
     function getJSON() {
         var json = editor.get();
-        alert(JSON.stringify(json, null, 2));
 
         $.ajax({
                 type: "POST",
@@ -43,7 +42,9 @@
                 success: function (data) {
                     if (data) {
                         if (data.success == true) {
-                            console.info(data);                           
+                            console.info(data)
+                            alert("Conteúdo atualizado com sucesso");
+                            location.reload();
                         } else {
                           
                         } 
@@ -51,7 +52,9 @@
                             
                 },
                 fail: function (data) {
-                    console.error(data);                                            
+                    console.error(data);  
+                    alert("falha ao atualizar json");
+                    location.reload();
                 }
             });
 

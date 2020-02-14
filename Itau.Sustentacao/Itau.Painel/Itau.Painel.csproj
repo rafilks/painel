@@ -157,6 +157,7 @@
     <Content Include="Content\jsoneditor\img\jsoneditor-icons.png" />
     <Content Include="Content\jsoneditor\jsoneditor.css" />
     <Content Include="Content\jsoneditor\jsoneditor.min.css" />
+    <Content Include="Dados\ert\Imagens\banner.png" />
     <Content Include="Imagens\baby.png" />
     <Content Include="Dados\erto\Imagens\ferias-grid.jpg" />
     <Content Include="Imagens\ferias.png" />
@@ -309,7 +310,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Dados\ert\Imagens\" />
     <Folder Include="Slides\" />
   </ItemGroup>
   <ItemGroup>
