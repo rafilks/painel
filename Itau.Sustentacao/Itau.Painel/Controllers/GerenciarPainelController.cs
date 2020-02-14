@@ -64,12 +64,12 @@ namespace Itau.Controllers
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return Json(new
                     {
                         success = false,
-                        responseText = "Atualizado com sucesso"
+                        responseText = ex.Message
                     }); ;                   
                 }
             }

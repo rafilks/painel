@@ -46,7 +46,9 @@
                             alert("Conteúdo atualizado com sucesso");
                             location.reload();
                         } else {
-                          
+                            console.error(data)
+                            alert("Falha ao atualizar o arquivo de configuração");
+                            location.reload();
                         } 
                     }
                             
