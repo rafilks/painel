@@ -1,0 +1,360 @@
+[
+  {
+    "NomeSquad": "Squad Suporte Cross",
+    "Proposito": "_contribuir para a qualidade das entregas, de forma contínua e planejada, fortalecendo e priorizando a integridade e a disponibilidade dos sistemas para nossos clientes_",
+    "InfoCerimonias": [
+      {
+        "Descricao": "Daily",
+        "Data": "Diariamente às",
+        "Hora": "10:00"
+      },
+      {
+        "Descricao": "Grooming",
+        "Data": "Todas as",
+        "Hora": "segundas"
+      },
+      {
+        "Descricao": "Demo",
+        "Data": "N/A",
+        "Hora": ""
+      },
+      {
+        "Descricao": "Retro",
+        "Data": "N/A",
+        "Hora": ""
+      }
+    ],
+    "Siglas": [
+      {
+        "CodSigla": "FN",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "DZ4",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "BP4",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "OD5",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "DZ9",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "FQ",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "HQ",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "CW6",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "AD6",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "PA6",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "BJ7",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "FO",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "OQ2",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "PY",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "AC5",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "OY8",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "GC1",
+        "Tipo": 1
+      },
+      {
+        "CodSigla": "TY1",
+        "Tipo": 1
+      },
+      {
+        "CodSigla": "QI1",
+        "Tipo": 1
+      },
+      {
+        "CodSigla": "FL",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "DY1",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "DU1",
+        "Tipo": 1
+      },
+      {
+        "CodSigla": "ZG",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "AE1",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "BC8",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "QV1",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "CK5",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "HE4",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "OM4",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "XA",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "RN1",
+        "Tipo": 3
+      },
+      {
+        "CodSigla": "SR1",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "SD9",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "EM4",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "DD6",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "DD2",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "CW9",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "BW6",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "BS3",
+        "Tipo": 4
+      },
+      {
+        "CodSigla": "OK9",
+        "Tipo": 4
+      }
+    ],
+    "NossoTime": [
+      {
+
+        "Nome": "Renato de Almeida",
+        "Principal": "Renato",
+        "Papel": "Product Owner",
+        "TipoPapel": 1,
+        "UrlImagem": "/Dados/ert/arquivos/Time/renato.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "Leonardo Breda",
+        "Principal": "Breda",
+        "Papel": "Tech Lead",
+        "TipoPapel": 3,
+        "UrlImagem": "/Dados/ert/arquivos/Time/breda.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "Antônio José Nobre Machado",
+        "Principal": "Nobre",
+        "Papel": "Team Member",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/ert/arquivos/Time/nobre.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "Cesar Henrique Bognar Serrano",
+        "Principal": "Cesar",
+        "Papel": "Team Member",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/ert/arquivos/Time/cesar.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "André de Souza Teixeira",
+        "Principal": "André",
+        "Papel": "Team Lead",
+        "TipoPapel": 2,
+        "UrlImagem": "/Dados/ert/arquivos/Time/andre.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "João Aparecido Virgulin",
+        "Principal": "Virgulin",
+        "Papel": "Team Member",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/ert/arquivos/Time/virgulin.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "Jonas Fabricio Kozamekinas",
+        "Principal": "Jonas",
+        "Papel": "Team Member",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/ert/arquivos/Time/jonas.png",
+        "Ausencia": ""
+      },
+      {
+        "Nome": "Talita O. do N. Albuquerque",
+        "Principal": "Talita",
+        "Papel": "Team Member",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/ert/arquivos/Time/talita.png",
+        "Ausencia": "ferias"
+      },
+      {
+        "Nome": "Beatriz Cabral Santalucia",
+        "Principal": "Beatriz",
+        "Papel": "Team Member",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/ert/arquivos/Time/beatriz.png",
+        "Ausencia": ""
+      }
+    ],
+    "AusenciaProgramada": [
+      {
+        "Nome": "André",
+        "Data": "26-02-2020",
+        "Motivo": "Compensação"
+      }
+    ],
+    "DadosPlantao": [
+      {
+        "Funcionario": "Renato | Moura",
+        "DataInicio": "17-02-2020",
+        "DataFim": "24-02-2020",
+        "Plataforma": "PRC | URA"
+      },
+      {
+        "Funcionario": "Breda | Marcos | Bia",
+        "DataInicio": "17-02-2020",
+        "DataFim": "24-02-2020",
+        "Plataforma": "WF | OD5 | Outros"
+      },
+      {
+        "Funcionario": "Virgulin",
+        "DataInicio": "17-02-2020",
+        "DataFim": "24-02-2020",
+        "Plataforma": "Mainframe"
+      },
+      {
+        "Funcionario": "Moura | Mathues",
+        "DataInicio": "24-02-2020",
+        "DataFim": "02-03-2020",
+        "Plataforma": "PRC | URA"
+      },
+      {
+        "Funcionario": "Marcos | Breda",
+        "DataInicio": "24-02-2020",
+        "DataFim": "02-03-2020",
+        "Plataforma": "WF | OD5 | Outros"
+      },
+      {
+        "Funcionario": "Alex",
+        "DataInicio": "24-02-2020",
+        "DataFim": "02-03-2020",
+        "Plataforma": "Mainframe"
+      }
+    ],
+    "Ferias": [
+      {
+        "Nome": "Talita",
+        "Tipo": "Férias",
+        "DataInicio": "03-02-2020",
+        "DataFim": "22-02-2020"
+      },
+      {
+        "Nome": "Nilson",
+        "Tipo": "Férias",
+        "DataInicio": "03-02-2020",
+        "DataFim": "17-02-2020"
+      },
+      {
+        "Nome": "Edson",
+        "Tipo": "Férias",
+        "DataInicio": "17-02-2020",
+        "DataFim": "21-02-2020"
+      },
+      {
+        "Nome": "Cesar",
+        "Tipo": "Férias",
+        "DataInicio": "27-02-2020",
+        "DataFim": "06-03-2020"
+      },
+      {
+        "Nome": "Alex",
+        "Tipo": "Férias",
+        "DataInicio": "27-02-2020",
+        "DataFim": "12-03-2020"
+      },
+      {
+        "Nome": "Samuel",
+        "Tipo": "Férias",
+        "DataInicio": "16-03-2020",
+        "DataFim": "30-03-2020"
+      },
+      {
+        "Nome": "Breda",
+        "Tipo": "Férias",
+        "DataInicio": "06-04-2020",
+        "DataFim": "20-04-2020"
+      },
+      {
+        "Nome": "Edson",
+        "Tipo": "Férias",
+        "DataInicio": "13-04-2020",
+        "DataFim": "17-04-2020"
+      }
+    ]
+  }
+]

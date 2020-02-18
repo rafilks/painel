@@ -98,3 +98,35 @@
 .fundo-painel {
     background-color: #252525;
 }
+
+.menu_squads{
+    align-content:center;
+    margin: 50px auto;
+    width: 90%;
+}
+
+.menu_squads .menu-item{
+    float:left;
+    width: 23%;
+    height: 100px;
+    margin: 1px;
+    background-color: black;
+}
+
+.menu_squads .menu-item:hover{
+    background-color: darkblue;
+}
+
+.menu_squads .menu-item .imagem{
+    height: 91%;
+    width: 96%;
+    margin: 2%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    float:left;
+}
+
+.novaequipe-container{
+   width:900px;
+}

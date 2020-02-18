@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Itau.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,20 +15,25 @@ namespace Itau.Controllers
         // GET: Config
         public ActionResult Index(string equipe)
         {
+            string mensagemErro = string.Empty;
+            List<Slide> slides = new List<Slide>();
+
             if (!string.IsNullOrEmpty(equipe))
             {
-                ViewBag.equipe = equipe;
-                ViewBag.conteudoJson = string.Empty;
-
+                ViewBag.equipe = equipe;   
                 try
                 {
                     using (StreamReader sr = new StreamReader(Server.MapPath($"~/Dados/{equipe}/slides-{equipe}.json"), Encoding.GetEncoding("ISO-8859-1")))
                     {
                         string conteudo = sr.ReadToEnd();
-                        ViewBag.conteudoJson = conteudo;
+
+                        var settings = new JsonSerializerSettings { DateFormatString = "dd-MM-yyyy" };
+                        slides = JsonConvert.DeserializeObject<List<Slide>>(conteudo, settings);
+
+                        return View();
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
