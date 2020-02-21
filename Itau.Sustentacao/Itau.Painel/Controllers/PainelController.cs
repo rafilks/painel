@@ -18,6 +18,7 @@ namespace Itau.Controllers
             string mensagemErro = string.Empty;
             List<Slide> slides = new List<Slide>();
             List<Configuracao> config = new List<Configuracao>();
+            List<string> equipes = new List<string>();
             Base basedados = new Base();
 
             if (!string.IsNullOrEmpty(equipe))
@@ -85,6 +86,16 @@ namespace Itau.Controllers
                 AjustaDadosCarregados(basedados);
                 ViewBag.proposito = basedados.Configuracao[0].Proposito;
             }
+            else
+            {
+                var listaDiretorio = Directory.GetDirectories(Server.MapPath($"~/Dados/")).ToList();
+                foreach (var item in listaDiretorio)
+                {
+                    equipes.Add(Path.GetFileName(item));
+                }
+                ViewBag.equipes = equipes;                         
+            }
+
             return View(basedados);
         }
 
@@ -292,77 +303,6 @@ namespace Itau.Controllers
                     //}
                 }
             }
-        }
-
-        [HttpPost]
-        public ActionResult CriarEquipe()
-        {
-            try
-            {
-                var jsonString = String.Empty;
-
-                Request.InputStream.Position = 0;
-                using (Stream receiveStream = Request.InputStream)
-                {
-                    using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
-                    {
-                        jsonString = readStream.ReadToEnd();
-                        if (!string.IsNullOrEmpty(jsonString))
-                        {
-                            var equipe = JsonConvert.DeserializeObject<Equipe>(jsonString);
-
-                            if (!string.IsNullOrEmpty(equipe.Nome))
-                            {
-                                Directory.CreateDirectory(Server.MapPath($"~/Dados/{equipe.Nome}"));
-                                Directory.CreateDirectory(Server.MapPath($"~/Dados/{equipe.Nome}/Arquivos"));
-                                Directory.CreateDirectory(Server.MapPath($"~/Dados/{equipe.Nome}/Arquivos/Time"));
-
-                                string caminhoArquivoSlides = Path.Combine(Server.MapPath($"~/Dados/{equipe.Nome}"), $"slides-{equipe.Nome}.json");
-                                string caminhoArquivoConfig = Path.Combine(Server.MapPath($"~/Dados/{equipe.Nome}"), $"config-{equipe.Nome}.json");
-
-                                using (StreamWriter slides = new StreamWriter(caminhoArquivoSlides))
-                                {
-                                    slides.WriteLine("[{}]");
-                                }
-                                using (StreamWriter config = new StreamWriter(caminhoArquivoSlides))
-                                {
-                                    config.WriteLine("[{}]");
-                                }
-
-                                return Json(new
-                                {
-                                    success = true,
-                                    responseText = "Criado com sucesso"
-                                }); ;
-                            }
-                            else
-                            {
-                                return Json(new
-                                {
-                                    success = false,
-                                    responseText = "Valor da equipe vazio"
-                                }); ;
-                            }
-                        }
-                        else
-                        {
-                            return Json(new
-                            {
-                                success = false,
-                                responseText = "Valor da equipe vazio"
-                            }); ;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new
-                {
-                    success = false,
-                    responseText = ex.Message
-                }); ;
-            }
-        }
+        }       
     }
 }

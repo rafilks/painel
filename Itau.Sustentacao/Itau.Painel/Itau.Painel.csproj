@@ -311,7 +311,8 @@
     <Content Include="Views\Painel\GestaoVisual.cshtml" />
     <Content Include="Views\GerenciarPainel\index.cshtml" />
     <Content Include="Scripts\jsoneditor\jsoneditor.map" />
-    <Content Include="Views\Config\Index.cshtml" />
+    <Content Include="Views\Config\CriarEquipe.cshtml" />
+    <Content Include="Views\Config\EditarSquad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

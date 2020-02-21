@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "EditarSquad";
+}
+
+@model Itau.Models.Configuracao
+
+
+<div class="panel panel-default bg-light w-75 p-5">
+    <div class="panel-body">
+        <h2>EditarSquad</h2>
+
+        @using (Html.BeginForm("EditarSquad", "Config", FormMethod.Post))
+        {
+        <div class="form-group">
+            <label for="NomeSquad">Nome:</label>
+            @Html.TextBoxFor(m => m.NomeSquad, new { @class = "form-control" })
+
+            <label for="Proposito">Propósito:</label>
+            @Html.TextBoxFor(m => m.Proposito, new { @class = "form-control" })
+
+            <label for="Siglas">Siglas:</label>   
+            
+            <div class="list-inline">
+                @foreach (Itau.Models.Sigla item in Model.Siglas)
+                {  
+                    <li name="@item.CodSigla" 
+                        class="list-inline-item @item.Tipo" 
+                        data-codsigla="@item.CodSigla"
+                        data-tipo="@item.Tipo">@item.CodSigla</li>
+                }
+            </div>
+
+            <button type="button"class="btn btn-primary mt-2">Atualizar</button>
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-warning mt-2" role="alert">
+                    Erro ao atualizar Squad: @Html.ValidationMessage("Error")
+                </div>
+            }
+        </div>
+        }
+
+    </div>
+</div>

@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Itau.Models
 {
+    [Serializable]
     public class Configuracao
     {
         public string NomeSquad { get; set; }
@@ -15,8 +16,21 @@ namespace Itau.Models
         public List<AusenciaProgramada> AusenciaProgramada { get; set; }
         public List<DadosPlantao> DadosPlantao { get; set; }
         public List<Ferias> Ferias { get; set; }
-    }
+        public List<Cerimonia> InfoCerimonias { get; set; }
 
+        public Configuracao()
+        {
+            NomeSquad = string.Empty;
+            Proposito = string.Empty;
+            InfoCerimonia = new List<Cerimonia>();
+            Siglas = new List<Sigla>();
+            NossoTime = new List<NossoTime>();
+            AusenciaProgramada = new List<AusenciaProgramada>();
+            DadosPlantao = new List<DadosPlantao>();
+            Ferias = new List<Ferias>();
+            InfoCerimonias = new List<Cerimonia>();
+        }
+    }
     public class DadosPlantao
     {
         public string Funcionario { get; set; }
@@ -47,7 +61,6 @@ namespace Itau.Models
         public int espaco2 { get; set; }
         public int espaco3 { get; set; }
     }
-
     public class Ferias
     {
         public string Nome { get; set; }
@@ -56,14 +69,15 @@ namespace Itau.Models
         public DateTime DataFim { get; set; }
         public string DataDisplay { get; set; }
         public List<MesFerias> Meses { get; set; }
-    }
-    
+    }    
     public class Cerimonia
     {
         public string Descricao { get; set; }
         public string Data { get; set; }
         public string Hora { get; set; }
     }
+
+    [Serializable]
     public class Sigla
     {
         public string CodSigla { get; set; }

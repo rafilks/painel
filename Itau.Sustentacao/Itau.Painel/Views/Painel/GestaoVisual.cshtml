@@ -1,74 +1,189 @@
 ﻿@using Itau.Models;
-@model Itau.Models.Slide
+@model Itau.Models.Base
 
 <div class="gestao-conteudo row m-0">
-    <div class="esquerda col-md-6 p-0">
-        <div class="nosso-time pb-3">
-            <div class="titulo text-center text-white p-3">
+    <div class="esquerda col-md-6">
+        <div class="nosso-time row">
+            <div class="titulo text-center text-white pt-3">
                 <h4>Nosso <span class="laranja-itau">Time</span></h4>
             </div>
-
-            <div class="d-flex flex-wrap">
-                @foreach (var item in Model.NossoTime)
-                {
-                    <div class="nosso-time-item">
-                        <img src="@item.UrlImagem" class="w-100" />
-                        <div class="ausencia @item.Ausencia"></div>
-                    </div>
-                }
+            <div class="w-100">
+                <div class="d-flex flex-wrap" style="width: 612px; margin: 0 auto;">
+                    @foreach (var item in Model.Configuracao[0].NossoTime.OrderBy(x => x.TipoPapel).ThenBy(x => x.Nome))
+                    {
+                        <div class="nosso-time-item @item.TipoPapel.ToString().ToLower() ausencia-@item.Ausencia">
+                            <img class="imagem" src="@item.UrlImagem">
+                            <div class="papel">@item.Papel</div>
+                            <div class="nome">@Html.Raw(item.Nome.Replace(item.Principal, "<span style=\"font-weight:bold\">" + item.Principal + "</span>"))</div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-        <div class="ausencia-programada">
-            <div class="titulo text-center text-white p-3">
-                <h4>Ausências <span class="laranja-itau">Programadas</span></h4>
+        <div id="ausencias_plantao" class="row" style="height: 100%;">
+            <div class="ausencia-programada col" style="float:left; height: 100%;">
+                <div class="titulo text-center text-white pt-3">
+                    <h4>Ausências <span class="laranja-itau">Programadas</span></h4>
+                </div>
+                <div class="d-flex flex-wrap">
+                    @foreach (var a in Model.Configuracao[0].AusenciaProgramada)
+                    {
+                        if (a.Valido)
+                        {
+                            <div class="ausencia-programada-item">
+                                <span class="item-data laranja-itau">@a.Data.ToString("dd/MM")</span>
+                                <span class="item-nome pl-3" style="color:white">@a.Nome<text> (</text>@a.Motivo<text>)</text></span>
+                            </div>
+                        }
+                    }
+                </div>
             </div>
-            <div class="d-flex flex-wrap">
-
-                @for (int i = 0; i < Model.AusenciaProgramada.Count; i++)
-                {
-                    <div class="ausencia-programada-item @(i % 2 == 0 ? "" : "alternado")">
-                        <strong>
-                            <span class="item-data laranja-itau">@Model.AusenciaProgramada[i].Data.ToString("dd/MM")</span>
-                            <span class="item-nome pl-3" style="color:white">@Model.AusenciaProgramada[i].Nome<text>(</text>@Model.AusenciaProgramada[i].Motivo<text>)</text></span>
-                        </strong>
+            <div class="plantao col" style="border-left: 3px black solid; height: 100%">
+                <div class="row">
+                    <div class="plantao-titulo col col-md-2">
+                        <div class="vertical">
+                            <div class="titutlo laranja-itau" style="font-weight:bold"><h4>Plantão</h4></div>
+                            <div class="periodo"><span>@ViewBag.inicioSemana.ToString("dd/MM") a @ViewBag.fimSemana.ToString("dd/MM")</span></div>
+                        </div>
                     </div>
-                }
+                    <div class="plantao-conteudo col">
+                        <div class="list-group">
+                            @foreach (var item in Model.Configuracao[0].DadosPlantao)
+                            {
+                                if (item.Valido)
+                                {
+                                    <div class="list-group-item w-100 bg-transparent border-0" style="padding-top:.15rem ! important;padding-bottom:.15rem ! important;">
+                                        <div class="d-flex w-100 justify-content-center laranja-itau font-weight-bold">
+                                            <span>@item.Plataforma</span>
+                                        </div>
+                                        <div class="d-flex w-100 justify-content-center text-white">
+                                            <h5 class="mb-1">@item.Funcionario</h5>
+                                        </div><br />
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="direita col-md-6 p-0">
-        <div class="ferias pb-3 pl-3">
-            <div class="titulo text-center text-white p-3">
+    <div class="direita col-md-6">
+        <div class="ferias row">
+            <div class="titulo text-center text-white pt-3">
                 <h4>Férias <span class="laranja-itau">| Próximos 90 dias</span></h4>
             </div>
-            <div class="grid-ferias">
-                <img src="~/Dados/@ViewBag.equipe/Imagens/ferias-grid.jpg" class="img-fluid w-100" />  
+            <div class="pl-3 w-100">
+                <table style="margin: 0 auto">
+                    <tr class="linhacabecalho">
+                        <td class="colunadados" colspan="3"></td>
+                        @for (int i = 0; i <= 2; i++)
+                        {
+                            <td class="colunames" style="width: @(DateTime.DaysInMonth(DateTime.Now.AddMonths(i).Year, DateTime.Now.AddMonths(i).Month) * 4)px;">@DateTime.Now.AddMonths(i).ToString("MMM/yy")</td>
+                            <td></td>
+                        }
+                    </tr>
+                    @for (int fer = 0; fer < 10; fer++)
+                    {
+                        Ferias f = Model.Configuracao[0].Ferias[fer];
+                        <tr class="linha">
+                            <td class="nome"><span style="padding-left: 5px">@f.Nome.ToString()</span></td>
+                            <td class="tipo">@f.Tipo.ToString()</td>
+                            <td class="datas">@f.DataDisplay.ToString()</td>
+                            <td class="mes">
+                                @if (!String.IsNullOrEmpty(f.DataDisplay))
+                                {
+                                    <table>
+                                        <tr style="height:24px">
+                                            <td class="mes" style="width: @((f.Meses[0].espaco1) * 4)px; padding:0px;"></td>
+                                            <td style="background-color:#806000; width: @(f.Meses[0].espaco2 * 4)px; height: 24px; padding:0px;"></td>
+                                            <td class="mes" style="width: @(f.Meses[0].espaco3 * 4)px; padding:0px;"></td>
+                                        </tr>
+                                    </table>
+                                }
+                            </td>
+                            <td class="separacaocoluna"></td>
+                            <td class="mes">
+                                @if (!String.IsNullOrEmpty(f.DataDisplay))
+                                {
+                                    <table>
+                                        <tr style="height:24px">
+                                            <td class="mes" style="width: @((f.Meses[1].espaco1) * 4)px; padding:0px;"></td>
+                                            <td style="background-color:#806000; width: @(f.Meses[1].espaco2 * 4)px; height: 24px; padding:0px;"></td>
+                                            <td class="mes" style="width: @(f.Meses[1].espaco3 * 4)px; padding:0px;"></td>
+                                        </tr>
+                                    </table>
+                                }
+                            </td>
+                            <td class="separacaocoluna"></td>
+                            <td class="mes">
+                                @if (!String.IsNullOrEmpty(f.DataDisplay))
+                                {
+                                    <table>
+                                        <tr style="height:24px">
+                                            <td class="mes" style="width: @((f.Meses[2].espaco1) * 4)px; padding:0px;"></td>
+                                            <td style="background-color:#806000; width: @(f.Meses[2].espaco2 * 4)px; height: 24px; padding:0px;"></td>
+                                            <td class="mes" style="width: @(f.Meses[2].espaco3 * 4)px; padding:0px;"></td>
+                                        </tr>
+                                    </table>
+                                }
+                            </td>
+                        </tr>
+                        <tr class="separacao">
+                            <td colspan="3"></td>
+                            <td class="separacaolinha"></td>
+                            <td></td>
+                            <td class="separacaolinha"></td>
+                            <td></td>
+                            <td class="separacaolinha"></td>
+                        </tr>
+                    }
+                </table>
             </div>
         </div>
-        <div class="plantao row">
-            <div class="plantao-titulo col-md-3">
-                <div class="vertical ">
-                    <div class="titutlo laranja-itau"><h4>Plantão</h4></div>
-                    <div class="periodo"><span>@ViewBag.inicioSemana.ToString("dd/MM") a @ViewBag.fimSemana.ToString("dd/MM")</span></div>
-                </div>
-            </div>
-            <div class="plantao-conteudo col-md-9 mt-3 pr-5">
-                <div class="list-group">
-                    @foreach (var item in Model.DadosPlantao)
-                    {
-                        if (item.PlantaoHoje == true)
-                        {
-                    <div class="list-group-item w-100 bg-transparent border-0">
-                        <div class="d-flex w-100 justify-content-center laranja-itau font-weight-bold">
-                            <span>@item.Plataforma</span>                           
-                        </div>
-                        <div class="d-flex w-100 justify-content-center text-white">                          
-                            <h5 class="mb-1">@item.Funcionario</h5>
-                        </div>
+        <div class="cerimonias row" style="height: 112px;">
+            @for (int iCer = 0; iCer < 4; iCer++)
+            {
+                <div class=@((iCer % 2 == 0) ? "cerimoniapar" : "cerimoniaimpar" )>
+                    <div class="titulo text-center text-white font-weight-bolder p-1">
+                        @Model.Configuracao[0].InfoCerimonias[iCer].Descricao
                     </div>
+                    <div class="titulo text-center text-white font-weight-light pt-3"><h6>@Model.Configuracao[0].InfoCerimonias[iCer].Data</h6></div>
+                    <div class="titulo text-center text-white font-weight-bolder"><h4 class="laranja-itau">@Model.Configuracao[0].InfoCerimonias[iCer].Hora</h4></div>
+                </div>
+            }
+        </div>
+        <div class="siglas row pl-3" style="border-top: 3px black solid;">
+            <div class="col">
+                <div class="row">
+                    <div class="titulo text-center text-white pt-2">
+                        <h4><span class="laranja-itau">Siglas</span> atendidas</h4>
+                    </div>
+                </div>
+
+                <div class="row item" style="width: 100%;">
+                    @if (Model.Configuracao[0].Siglas != null)
+                    {
+                        foreach (var s in Model.Configuracao[0].Siglas.OrderBy(x => x.CodSigla))
+                        {
+                            <div class="item @s.Tipo">@s.CodSigla</div>
                         }
                     }
+                </div>
 
+                <div class="row item pt-4" style="width: 100%; float: right;">
+                    <div class="item ambos ml-3" style="width: 10px; height: 10px;"></div>
+                    <div class="glossario-texto ml-1">Mainframe / Distribuída</div>
+
+                    <div class="item mainframe ml-3" style="width: 10px; height: 10px;"></div>
+                    <div class="glossario-texto ml-1">Mainframe</div>
+
+                    <div class="item distribuida ml-3" style="width: 10px; height: 10px;"></div>
+                    <div class="glossario-texto ml-1">Distribuída</div>
+
+                    <div class="item outros ml-3" style="width: 10px; height: 10px;"></div>
+                    <div class="glossario-texto ml-1">Outros</div>
                 </div>
             </div>
         </div>
