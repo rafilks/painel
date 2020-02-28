@@ -38,13 +38,13 @@ namespace Itau.Models
     
     public enum TipoSigla
     {
-        [Description("ambos")]
+        [Description("Ambos")]
         ambos = 1,
-        [Description("mainframe")]
+        [Description("Mainframe")]
         mainframe = 2,
-        [Description("distribuida")]        
+        [Description("Distribuída")]        
         distribuida = 3,
-        [Description("outros")]
+        [Description("Outros")]
         outros = 4
     }
 }

@@ -1,0 +1,99 @@
+﻿@using Itau.Common
+@model List<Itau.Models.NossoTime>
+
+<div class="container bg-light">
+
+    <div class="row">
+        <div class="col-md">
+            @Html.ActionLink("Voltar", "EditarSquad", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary mt-2 mb-4" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <h3>Nosso Time</h3>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Nome</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Papel</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Ausência</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span></span>
+                    </div>
+                </div>
+
+                @foreach (Itau.Models.NossoTime item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span>@item.Nome</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.TipoPapel.GetDescription()</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.Ausencia</span>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.ActionLink("Excluir", "ExcluirNossoTime", "Config", new { equipe = ViewBag.equipe, nome = item.Nome }, new { @class = "btn btn-primary mt-1" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md">
+            <h3>Novo Item</h3>
+
+            @using (Html.BeginForm("CriarEditarNossoTime", "Config", new { equipe = ViewBag.equipe }, FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="Nome">Nome</label>
+                    <input type="text" name="Nome" class="form-control" placeholder="Nome" />
+
+                    <label for="Nome">Apelido</label>
+                    <input type="text" name="Principal" class="form-control" placeholder="Apelido" />
+
+                    <label for="Nome">Tipo de Papel</label>
+                    <select class="form-control" name="TipoPapel">
+                        <option value="1">Product Owner</option>
+                        <option value="2">Team Lead</option>
+                        <option value="3">Tech Lead</option>
+                        <option value="4">Team Member</option>
+                    </select>
+
+                    <label for="Nome">Descrição Papel</label>
+                    <input type="text" name="Papel" class="form-control" placeholder="Descrição Papel" />
+
+                    <label for="Nome">Ausência</label>
+                    <select class="form-control" name="Ausencia">
+                        <option value=""></option>
+                        <option value="ferias">Férias</option>
+                        <option value="maternidade">Maternidade</option>
+                        <option value="licenca">Licença</option>
+                    </select>
+
+                    <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning mt-2" role="alert">
+                            Erro ao criar Sigla: @Html.ValidationMessage("Error")
+                        </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+

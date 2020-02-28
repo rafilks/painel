@@ -313,6 +313,8 @@
     <Content Include="Scripts\jsoneditor\jsoneditor.map" />
     <Content Include="Views\Config\CriarEquipe.cshtml" />
     <Content Include="Views\Config\EditarSquad.cshtml" />
+    <Content Include="Views\Config\EditarSiglas.cshtml" />
+    <Content Include="Views\Config\EditarNossoTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
