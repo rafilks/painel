@@ -11,7 +11,7 @@ using System.Web.Mvc;
 namespace Itau.Controllers
 {
     public class ConfigController : Controller
-    {        
+    {
         [HttpGet]
         public ActionResult CriarEquipe()
         {
@@ -26,6 +26,7 @@ namespace Itau.Controllers
 
                 if (!novaEquipe.Nome.Any(Char.IsWhiteSpace))
                 {
+                    ViewBag.equipe = novaEquipe;
 
                     try
                     {
@@ -36,17 +37,17 @@ namespace Itau.Controllers
                         string caminhoArquivoSlides = Path.Combine(Server.MapPath($"~/Dados/{novaEquipe.Nome}"), $"slides-{novaEquipe.Nome}.json");
                         string caminhoArquivoConfig = Path.Combine(Server.MapPath($"~/Dados/{novaEquipe.Nome}"), $"config-{novaEquipe.Nome}.json");
 
-                        using (StreamWriter slides = new StreamWriter(caminhoArquivoSlides))
+                        using (StreamWriter slidesWriter = new StreamWriter(caminhoArquivoSlides))
                         {
-                            slides.WriteLine("[{}]");
+                            slidesWriter.WriteLine("[{}]");
                         }
-                        using (StreamWriter config = new StreamWriter(caminhoArquivoConfig))
+                        using (StreamWriter configWriter = new StreamWriter(caminhoArquivoConfig))
                         {
                             List<Configuracao> configuracoes = new List<Configuracao>() { new Configuracao() };
 
                             var settings = new JsonSerializerSettings { DateFormatString = "dd-MM-yyyy" };
                             var result = JsonConvert.SerializeObject(configuracoes, settings);
-                            config.WriteLine(result);
+                            configWriter.WriteLine(result);
                         }
 
                         return RedirectToAction("EditarSquad", "Config", new { equipe = novaEquipe.Nome });
@@ -78,15 +79,17 @@ namespace Itau.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult EditarSquad(string equipe)
         {
-            Configuracao config = new Configuracao();     
+            Configuracao config = new Configuracao();
 
             if (!string.IsNullOrEmpty(equipe))
             {
                 ViewBag.equipe = equipe;
                 ViewBag.logo_equipe = $"/Dados/{equipe}/arquivos/logo.png";
-                ViewBag.bannerEquipe = $"/Imagens/banner.png";               
+                ViewBag.bannerEquipe = $"/Imagens/banner.png";
+                ViewBag.mensagemSucesso = TempData["mensagemSucesso"] != null ? TempData["mensagemSucesso"].ToString() : String.Empty;
 
                 #region Lê a configuração
 
@@ -99,7 +102,7 @@ namespace Itau.Controllers
                         if (!string.IsNullOrEmpty(equipe))
                         {
                             var settings = new JsonSerializerSettings { DateFormatString = "dd-MM-yyyy" };
-                            config = JsonConvert.DeserializeObject<List<Configuracao>>(conteudo, settings).FirstOrDefault();                            
+                            config = JsonConvert.DeserializeObject<List<Configuracao>>(conteudo, settings).FirstOrDefault();
                         }
                     }
                 }
@@ -117,9 +120,62 @@ namespace Itau.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditarSquad(Configuracao config)
+        public ActionResult EditarSquad(string equipe, Configuracao configUpdate)
         {
+            if (!string.IsNullOrEmpty(equipe))
+            {
+                string caminhoArquivoConfig = Path.Combine(Server.MapPath($"~/Dados/{equipe}"), $"config-{equipe}.json");
+                var settings = new JsonSerializerSettings { DateFormatString = "dd-MM-yyyy" };
+                Configuracao configToSave;
 
+                try
+                {
+                    if (Request.Files.Count > 0)
+                    {
+                        var file = Request.Files[0];
+
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath($"~/Dados/{equipe}/arquivos/"), "logo.png");
+                            file.SaveAs(path);
+                        }
+                    }
+
+                    using (StreamReader sr = new StreamReader(caminhoArquivoConfig, Encoding.GetEncoding("ISO-8859-1")))
+                    {
+                        string conteudo = sr.ReadToEnd();
+                        configToSave = JsonConvert.DeserializeObject<List<Configuracao>>(conteudo, settings).FirstOrDefault();
+
+                        //Atualização dos dados
+                        configToSave.NomeSquad = configUpdate.NomeSquad;
+                        configToSave.Proposito = configUpdate.Proposito;
+                    }
+
+                    using (StreamWriter configWriter = new StreamWriter(caminhoArquivoConfig))
+                    {
+                        List<Configuracao> configuracoes = new List<Configuracao>();
+                        configuracoes.Add(configToSave);
+
+                        var result = JsonConvert.SerializeObject(configuracoes, settings);
+                        configWriter.WriteLine(result);
+
+                        TempData["mensagemSucesso"] = "Configuração atualizada com sucesso";
+                    }
+
+                    return RedirectToAction("EditarSquad", "Config", new { equipe = equipe });
+
+                }
+                catch (FileNotFoundException ex)
+                {
+                    ViewBag.mensagemErro = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.mensagemErro = ex.Message;
+                }
+
+            }
             return View();
         }
     }

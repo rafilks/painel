@@ -9,9 +9,39 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="bg-dark">
-    <header>      
-        <nav class="navbar navbar-dark">
-            <img class="img-fluid w-100" src="@ViewBag.bannerEquipe" />            
+    <header>
+        <nav class="navbar navbar-dark" style="padding:0 !important; border-bottom: 3px white black;">
+            <table>
+                <tr>
+                    <td style="background-color: #262626; height: 74px; width: 267px; align-content: center;">
+                        <img style="height: 100%; float: left;" src="../../Imagens/comunidades/comun_canais.png" />
+                    </td>
+                    <td style="background-color: #262626; height: 74px; width: 13px; align-content: center;">
+                        <img style="height: 100%; float: left;" src="../../Imagens/comunidades/separador.png" />
+                    </td>
+                    <td style="background-color: #262626; height: 74px; width: 267px; align-content: center;">
+                        <img style="height: 100%; float: left;" src="../../Imagens/comunidades/RTAtendimento.png" />
+                    </td>
+                    <td style="background-color: #262626; height: 74px; width: 13px; align-content: center;">
+                        <img style="height: 100%; float: left;" src="../../Imagens/comunidades/separador.png" />
+                    </td>
+                    <td style="background-color: #262626; width: 130px; height: 74px; align-content: center;">
+                        <img style="height: 100%; float: left; padding: 10px 20px" src="@ViewBag.logo_equipe" />
+                    </td>
+                    <td style="background-color: #262626; height: 74px; width: 13px; align-content: center;">
+                        <img style="height: 100%; float: left;" src="../../Imagens/comunidades/separador.png" />
+                    </td>
+                    <td style="background-color: #222222; width: 100%; height: 74px;">
+                        <div style="height: 100%; width: 100%; padding: 0px 20px; margin: 0px 2px; font-size: smaller; color: white;">
+                            Nosso propósito:
+                            @if (ViewBag.proposito != null)
+                            {
+                                <p style="font-size:medium; color: white; font-size: medium; font-weight: 700">@ViewBag.proposito</p>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </nav>
     </header>
     <div class="body-content container-fluid fundo-painel">

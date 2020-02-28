@@ -5,11 +5,12 @@ using System.Web;
 
 namespace Itau.Models
 {
-    [Serializable]
+    
     public class Configuracao
     {
         public string NomeSquad { get; set; }
         public string Proposito { get; set; }
+        //public HttpPostedFileBase Logo { get; set; }
         public List<Cerimonia> InfoCerimonia { get; set; }
         public List<Sigla> Siglas { get; set; }
         public List<NossoTime> NossoTime { get; set; }
@@ -77,7 +78,6 @@ namespace Itau.Models
         public string Hora { get; set; }
     }
 
-    [Serializable]
     public class Sigla
     {
         public string CodSigla { get; set; }
