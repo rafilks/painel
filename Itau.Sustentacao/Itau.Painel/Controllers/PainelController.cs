@@ -142,7 +142,7 @@ namespace Itau.Controllers
                 Ferias f = new Ferias();
                 f.Nome = "";
                 f.Tipo = "";
-                f.DataDisplay = "";
+                //f.DataDisplay = "";
                 basedados.Configuracao[0].Ferias.Add(f);
             }
 
@@ -153,7 +153,7 @@ namespace Itau.Controllers
 
                 if (!String.IsNullOrEmpty(f.Nome))
                 {
-                    f.DataDisplay = String.Concat(f.DataInicio.ToString("dd/MM"), "-", f.DataFim.ToString("dd/MM"));
+                    //f.DataDisplay = String.Concat(f.DataInicio.ToString("dd/MM"), "-", f.DataFim.ToString("dd/MM"));
 
                     for (int m = 0; m <= 2; m++)
                     {

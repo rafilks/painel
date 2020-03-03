@@ -68,7 +68,11 @@ namespace Itau.Models
         public string Tipo { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
-        public string DataDisplay { get; set; }
+        public string DataDisplay {
+            get {
+                return DataInicio.ToString("dd/MM") + "-" + DataFim.ToString("dd/MM");
+            }
+        }
         public List<MesFerias> Meses { get; set; }
     }    
     public class Cerimonia

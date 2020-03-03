@@ -1,1 +1,88 @@
-[{"NomeSquad":"Nome Squad Atualizado","Proposito":"Proposito Atualizado - Andre logo","InfoCerimonia":[],"Siglas":[{"CodSigla":"FN","Tipo":2},{"CodSigla":"DZ4","Tipo":2},{"CodSigla":"OD5","Tipo":3}],"NossoTime":[{"Nome":"Rafael dos Santos","Principal":"Rafa","Papel":null,"TipoPapel":1,"UrlImagem":null,"Ausencia":"ferias"}],"AusenciaProgramada":[],"DadosPlantao":[],"Ferias":[],"InfoCerimonias":[]}]
+[
+  {
+    "NomeSquad": "Nome Squad Atualizado",
+    "Proposito": "Proposito Atualizado - Andre logo",
+    "InfoCerimonia": [],
+    "Siglas": [
+      {
+        "CodSigla": "FN",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "DZ4",
+        "Tipo": 2
+      },
+      {
+        "CodSigla": "OD5",
+        "Tipo": 3
+      }
+    ],
+    "NossoTime": [
+      {
+        "Nome": "Rafael dos Santos",
+        "Principal": "Rafa",
+        "Papel": "Desc",
+        "TipoPapel": 2,
+        "UrlImagem": null,
+        "Ausencia": "Férias"
+      },
+      {
+        "Nome": "Andre T",
+        "Principal": "Andre",
+        "Papel": "Desc",
+        "TipoPapel": 1,
+        "UrlImagem": "/Dados/tem/arquivos/Time/Andre.png",
+        "Ausencia": "Maternidade"
+      }
+    ],
+    "AusenciaProgramada": [
+      {
+        "Nome": "Rafael dos Santos",
+        "Data": "01-01-2020",
+        "Motivo": "Ferias",
+        "Valido": false
+      },
+      {
+        "Nome": "Andre",
+        "Data": "01-04-2020",
+        "Motivo": "BBB",
+        "Valido": false
+      }
+    ],
+    "DadosPlantao": [
+      {
+        "Funcionario": "Rafael | Andre",
+        "Valido": false,
+        "Plataforma": "OD5",
+        "DataInicio": "01-03-2020",
+        "DataFim": "06-03-2020"
+      },
+      {
+        "Funcionario": "Breda",
+        "Valido": false,
+        "Plataforma": "DZ4",
+        "DataInicio": "01-03-2020",
+        "DataFim": "31-03-2020"
+      }
+    ],
+    "Ferias": [
+      {
+        "Nome": "Rafael dos Santos",
+        "Tipo": "Férias",
+        "DataInicio": "03-03-2020",
+        "DataFim": "31-03-2020",
+        "DataDisplay": "03/03-31/03",
+        "Meses": null
+      },
+      {
+        "Nome": "Andre",
+        "Tipo": "Férias",
+        "DataInicio": "01-03-2020",
+        "DataFim": "31-03-2020",
+        "DataDisplay": "01/03-31/03",
+        "Meses": null
+      }
+    ],
+    "InfoCerimonias": []
+  }
+]
