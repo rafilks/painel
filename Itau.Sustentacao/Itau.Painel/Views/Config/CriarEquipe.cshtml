@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Configuração de Equipes";
+}
+
+@model Itau.Models.Equipe
+
+
+<div class="panel panel-default bg-light w-75 p-5">
+    <div class="panel-body">
+        <h2>_crie uma nova equipe</h2>
+
+        @using (Html.BeginForm("CriarEquipe", "Config", FormMethod.Post))
+        {
+            <div class="form-group">
+                <label for="Nome">Nova Equipe</label>
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Insira o nome curto e sem espaço" })
+
+                <button type="submit" value="submit" class="btn btn-primary mt-2">Criar</button>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-warning mt-2" role="alert">
+                        Erro ao criar equipe: @Html.ValidationMessage("Error")
+                    </div>
+                }
+            </div>
+        }
+
+    </div>
+</div>
+
+

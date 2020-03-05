@@ -1,0 +1,27 @@
+[
+  {
+    "NomeSquad": "DDD",
+    "Proposito": "Fazer ligação interurbana",
+    "InfoCerimonia": [],
+    "Siglas": [
+      {
+        "CodSigla": "AZ",
+        "Tipo": 1
+      }
+    ],
+    "NossoTime": [
+      {
+        "Nome": "OI Telecom",
+        "Principal": "OI",
+        "Papel": "Simples",
+        "TipoPapel": 4,
+        "UrlImagem": "/Dados/dddd/arquivos/Time/OI.png",
+        "Ausencia": null
+      }
+    ],
+    "AusenciaProgramada": [],
+    "DadosPlantao": [],
+    "Ferias": [],
+    "InfoCerimonias": []
+  }
+]

@@ -89,8 +89,8 @@
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
@@ -138,11 +138,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\GerenciarPainelController.cs" />
     <Compile Include="Controllers\PainelController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Configuracao.cs" />
+    <Compile Include="Models\Equipe.cs" />
     <Compile Include="Models\Slide.cs" />
     <Compile Include="Models\TipoSlide.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +157,13 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\jsoneditor\img\jsoneditor-icons.png" />
     <Content Include="Content\jsoneditor\jsoneditor.css" />
     <Content Include="Content\jsoneditor\jsoneditor.min.css" />
@@ -195,6 +205,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Dados\erto\slides-erto.json" />
+    <Content Include="Dados\ert\config-ert.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -204,6 +215,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -307,6 +319,13 @@
     <Content Include="Views\Painel\GestaoVisual.cshtml" />
     <Content Include="Views\GerenciarPainel\index.cshtml" />
     <Content Include="Scripts\jsoneditor\jsoneditor.map" />
+    <Content Include="Views\Config\CriarEquipe.cshtml" />
+    <Content Include="Views\Config\EditarSquad.cshtml" />
+    <Content Include="Views\Config\EditarSiglas.cshtml" />
+    <Content Include="Views\Config\EditarNossoTime.cshtml" />
+    <Content Include="Views\Config\EditarAusencias.cshtml" />
+    <Content Include="Views\Config\EditarFerias.cshtml" />
+    <Content Include="Views\Config\EditarPlantao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

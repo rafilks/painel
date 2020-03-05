@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "EditarSquad";
+}
+
+@model Itau.Models.Configuracao
+
+
+<div class="container bg-light">
+    <div class="row">
+        <div class="col-md p-3">
+            <h3>_editar squad</h3>
+            @using (Html.BeginForm("EditarSquad",
+                "Config",
+                new { equipe = ViewBag.equipe },
+                FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="NomeSquad">Nome:</label>
+                    @Html.TextBoxFor(m => m.NomeSquad, new { @class = "form-control" })
+
+                    <label for="Proposito">Propósito:</label>
+                    @Html.TextAreaFor(m => m.Proposito, new { @class = "form-control" })
+
+                    <label for="Siglas">Siglas:</label>
+
+                    <div class="list-inline">
+                        <ul>
+                            @foreach (Itau.Models.Sigla item in Model.Siglas)
+                            {
+                                <li name="@item.CodSigla"
+                                    class="list-inline-item @item.Tipo"
+                                    data-codsigla="@item.CodSigla"
+                                    data-tipo="@item.Tipo">
+                                    @item.CodSigla
+                                </li>
+                            }
+                        </ul>
+                    </div>
+
+                    <label for="Logo">Logo:</label>
+                    <input type="file" name="Logo" class="form-control-file" accept=".png" />
+
+                    <button type="submit" class="btn btn-primary mt-2">Atualizar</button>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning mt-2" role="alert">
+                            Erro ao atualizar Squad: @Html.ValidationMessage("Error")
+                        </div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(ViewBag.mensagemSucesso))
+                    {
+                        <div class="alert alert-success mt-2" role="alert">
+                            @ViewBag.mensagemSucesso
+                        </div>
+                    }
+
+                </div>
+            }
+
+            <div class="btn-toolbar" role="toolbar" aria-label="Ações">
+                <div class="btn-group mr-2" role="group" aria-label="Siglas">
+                    @Html.ActionLink("Siglas", "EditarSiglas", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="NossoTime">
+                    @Html.ActionLink("Nosso Time", "EditarNossoTime", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Ausências Programadas">
+                    @Html.ActionLink("Ausências Programadas", "EditarAusencias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Férias">
+                    @Html.ActionLink("Férias", "EditarFerias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Plantões">
+                    @Html.ActionLink("Plantões", "EditarPlantao", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                </div>
+                <div class="btn-group" role="group" aria-label="Slides">
+                    @Html.ActionLink("Slides", "EditarSlides", "Slides", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+ 

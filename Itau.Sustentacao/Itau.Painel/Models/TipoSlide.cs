@@ -23,4 +23,28 @@ namespace Itau.Models
         [Description("Embed")]
         Embed = 5
     }
+
+    public enum TipoPapel
+    {
+        [Description("Product Owner")]
+        PO = 1,
+        [Description("Team Lead")]
+        TL = 2,
+        [Description("Tech Lead")]
+        Tcl = 3,
+        [Description("Team Member")]
+        Tm = 4
+    }
+    
+    public enum TipoSigla
+    {
+        [Description("Ambos")]
+        ambos = 1,
+        [Description("Mainframe")]
+        mainframe = 2,
+        [Description("Distribuída")]        
+        distribuida = 3,
+        [Description("Outros")]
+        outros = 4
+    }
 }

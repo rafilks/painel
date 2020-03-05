@@ -1,70 +1,149 @@
 ﻿.navbar {
     height: 80px;
-    background-color: black;
+    background-color: #252525;
 }
 
+.titulo {
+    width: 100%;
+}
+
+#carouselSlides {
+    border-top: 3px black solid;
+}
+
+h4 {
+    font-weight: 700 !important;
+}
 
 #carouselSlides video {
     min-height: 100% !important;
-    min-width: 95% !important;
+    min-width: 100% !important;
     height: auto !important;
-    width: 95% !important;
+    width: 100% !important;
     overflow: hidden;
 }
 
-/*.gestao-conteudo {
+#carouselSlides embed {
+    background-color: white;
+}
+
+.gestao-conteudo {
     min-height: 688px;
-    height:100%;
-}*/
-
-.gestao-conteudo .esquerda {
-    border-right: 3px solid black;
-    /*padding: 0px !important;
-        margin: 0px !important;*/
+    height: 100%;
 }
 
-.gestao-conteudo .nosso-time {
-    border-bottom: 3px solid black;
+    .gestao-conteudo .esquerda {
+        border-right: 3px solid black;
+    }
+
+    .gestao-conteudo .nosso-time {
+        border-bottom: 3px solid black;
+    }
+
+        .gestao-conteudo .nosso-time .nosso-time-item {
+            height: 63.5px;
+            border-radius: 10px;
+            width: 196px;
+            margin: 4px;
+        }
+
+            .gestao-conteudo .nosso-time .nosso-time-item .imagem {
+                margin-left: 4px;
+                margin-top: 2px;
+                height: 57.5px;
+                width: 57.5px;
+                float: left;
+                border-radius: 2px;
+            }
+
+            .gestao-conteudo .nosso-time .nosso-time-item .papel {
+                margin-left: 6px;
+                top: 2px;
+                color: white;
+                float: left;
+                font-size: 9px;
+                font-weight: 600;
+            }
+
+            .gestao-conteudo .nosso-time .nosso-time-item .nome {
+                margin-left: 6px;
+                top: 2px;
+                width: 124px;
+                color: white;
+                float: left;
+                font-size: 12px;
+                font-weight: 100;
+                padding-top: 11px;
+            }
+
+            .gestao-conteudo .nosso-time .nosso-time-item.po {
+                background-color: #0f5282;
+                border: 2px solid #0070c0;
+            }
+
+            .gestao-conteudo .nosso-time .nosso-time-item.tl {
+                background-color: #0f793f;
+                border: 2px solid #00b050;
+            }
+
+            .gestao-conteudo .nosso-time .nosso-time-item.tcl {
+                background-color: #a80f0f;
+                border: 2px solid #ff0000;
+            }
+
+            .gestao-conteudo .nosso-time .nosso-time-item.tm {
+                background-color: #6d8499;
+                border: 2px solid #9dc3e6;
+            }
+
+.ausencia-maternidade {
+    background-image: url('../Imagens/baby.png');
+    background-repeat: no-repeat;
+    background-position: right 3px top 3px;
+    background-size: 28px 28px;
 }
 
-.gestao-conteudo .nosso-time .nosso-time-item{
-    width: 218px;
-    padding-right:5px;
-    padding-bottom: 5px;
-    position: relative;
+.ausencia-ferias {
+    background-image: url('../Imagens/ferias.png');
+    background-repeat: no-repeat;
+    background-position: right 3px top 3px;
+    background-size: 28px 28px;
 }
 
-.gestao-conteudo .nosso-time .nosso-time-item .ausencia{
-    position:absolute;
-    width: 32px;
-    height: 32px;
-    top:5px;
-    right:10px;
-}
-
-.gestao-conteudo .nosso-time .nosso-time-item .ausencia.maternidade{
-     background: url('../Imagens/baby.png') center no-repeat;
-}
-
-.gestao-conteudo .nosso-time .nosso-time-item .ausencia.ferias {   
-    background: url('../Imagens/ferias.png') center no-repeat;
+.ausencia-licenca {
+    background-image: url('../Imagens/licenca.png');
+    background-repeat: no-repeat;
+    background-position: right 3px top 3px;
+    background-size: 28px 28px;
 }
 
 .ausencia-programada {
-    min-height:300px;
+    min-height: 300px;
+    width: 300px;
 }
 
-.ausencia-programada .ausencia-programada-item{
-    width: 300px;  
-    line-height:50px;
-    padding-left:10px;
-}
+    .ausencia-programada .ausencia-programada-item {
+        width: 100%;
+        padding-left: 10px;
+    }
 
-.ausencia-programada .ausencia-programada-item.alternado{
-    padding-left:40px;
-    border-left: 2px white solid;
-}
+        .ausencia-programada .ausencia-programada-item.alternado {
+            padding-left: 40px;
+            border-left: 2px white solid;
+        }
 
+.gestao-conteudo .esquerda .plantao .plantao-titulo .vertical {
+    margin-top: 80px;
+    margin-left: -30px;
+    width: 99px;
+    align-content: center;
+    -ms-transform: rotate(270deg); /* IE 9 */
+    -moz-transform: rotate(270deg); /* Firefox */
+    -webkit-transform: rotate(270deg); /* Safari and Chrome */
+    -o-transform: rotate(270deg); /* Opera */
+    color: white;
+    text-align: center;
+}
 
 .gestao-conteudo .direita .ferias {
     border-bottom: 3px solid black;
@@ -72,29 +151,182 @@
 }
 
 .gestao-conteudo .direita .grid-ferias img {
-    width:796px;
+    width: 796px;
     height: 364px;
 }
 
-.gestao-conteudo .direita .plantao .plantao-titulo{
-    margin-top:65px;
-}
-.gestao-conteudo .direita .plantao .vertical {
-    width: 130px;
-    height: 50px;
-    -ms-transform: rotate(270deg); /* IE 9 */
-    -moz-transform: rotate(270deg); /* Firefox */
-    -webkit-transform: rotate(270deg); /* Safari and Chrome */
-    -o-transform: rotate(270deg); /* Opera */
+.gestao-conteudo .direita .ferias .linha {
+    height: 24px;
+    text-align: center;
     color: white;
     font-weight: bold;
+}
+
+.gestao-conteudo .direita .ferias .linhacabecalho {
+    height: 24px;
     text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+.gestao-conteudo .direita .ferias .linha .separacao {
+    height: 2px;
+}
+
+.gestao-conteudo .direita .ferias .linhacabecalho .colunadados {
+    width: 272px;
+}
+
+.gestao-conteudo .direita .ferias .linhacabecalho .colunames {
+    background-color: #483500;
+}
+
+.gestao-conteudo .direita .ferias .linha .nome {
+    background-color: #ff6600;
+    width: 122px;
+    font-size: medium;
+    font-weight: bold;
+    text-align: left;
+}
+
+.gestao-conteudo .direita .ferias .linha .tipo {
+    background-color: #ff6600;
+    width: 50px;
+    font-size: x-small;
+}
+
+.gestao-conteudo .direita .ferias .linha .datas {
+    background-color: #ff6600;
+    width: 100px;
+    font-size: medium;
+    font-weight: bold;
+    font-size: small;
+}
+
+.gestao-conteudo .direita .ferias .linha .datas {
+    background-color: #ff6600;
+    width: 100px;
+    font-size: medium;
+    font-weight: bold;
+    font-size: small;
+}
+
+.gestao-conteudo .direita .ferias .linha .separacaocoluna {
+    background-color: #ff6600;
+}
+
+.gestao-conteudo .direita .ferias .linha .separacaolinha {
+    background-color: #483500;
+}
+
+.gestao-conteudo .direita .ferias .linha .mes {
+    background-color: #de5a00;
 }
 
 .laranja-itau {
-   color: #ff6600;
+    color: #ff6600;
 }
 
 .fundo-painel {
     background-color: #252525;
 }
+
+.menu_squads {
+    align-content: center;
+    margin: 50px auto;
+    width: 90%;
+}
+
+    .menu_squads .menu-item {
+        float: left;
+        width: 23%;
+        height: 100px;
+        margin: 1%;
+        background-color: black;
+    }
+
+        .menu_squads .menu-item :hover {
+            background-color: darkblue;
+        }
+
+        .menu_squads .menu-item .imagem {
+            height: 91%;
+            width: 96%;
+            margin: 2%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            float: left;
+        }
+
+.cerimonias {
+}
+
+    .cerimonias .cerimoniapar {
+        height: 100%;
+        width: 25%;
+        float: left;
+        background-color: #222222;
+    }
+
+    .cerimonias .cerimoniaimpar {
+        height: 100%;
+        width: 25%;
+        float: left;
+        background-color: #252525;
+    }
+
+    .cerimonias .demo {
+        height: 100%;
+        width: 25%;
+        float: left;
+        background-color: #222222;
+    }
+
+    .cerimonias .retro {
+        height: 100%;
+        width: 25%;
+        float: left;
+        background-color: #252525;
+    }
+
+.siglas {
+    border-bottom: 3px solid black;
+    position: relative;
+}
+
+    .siglas .item {
+        float: left;
+        border-radius: 2px;
+        margin-left: 3px;
+        margin-top: 3px;
+        color: white;
+        font-size: medium;
+        font-weight: 500;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+        .siglas .item .mainframe {
+            background-color: #a8a80f;
+            color: black;
+        }
+
+        .siglas .item .distribuida {
+            background-color: #0f5282;
+        }
+
+        .siglas .item .ambos {
+            background-color: #0f793f;
+        }
+
+        .siglas .item .outros {
+            background-color: #a80f0f;
+        }
+
+    .siglas .glossario-texto {
+        color: white;
+        font-size: x-small;
+        font-weight: normal;
+    }
+

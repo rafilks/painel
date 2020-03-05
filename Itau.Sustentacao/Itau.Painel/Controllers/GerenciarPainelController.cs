@@ -40,7 +40,6 @@ namespace Itau.Controllers
         [HttpPost]
         public ActionResult SalvarJson(string equipe)
         {
-
             if (!string.IsNullOrEmpty(equipe))
             {
                 try

@@ -1,0 +1,103 @@
+﻿@using Itau.Common
+@model List<Itau.Models.AusenciaProgramada>
+
+<div class="container bg-light">
+
+    <div class="row">
+        <div class="col-md">
+            @Html.ActionLink("Voltar", "EditarSquad", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary mt-2 mb-4" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <h3>Ausência Programada</h3>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Nome</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Data</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Motivo</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span></span>
+                    </div>
+                </div>
+
+                @foreach (Itau.Models.AusenciaProgramada item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span>@item.Nome</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.Data.ToString("dd-MM-yyyy")</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.Motivo</span>
+                        </div>
+                        <div class="col-sm-3">
+                            @Html.ActionLink("Excluir", "ExcluirAusencias", "Config", new { equipe = ViewBag.equipe, nome = item.Nome }, new { @class = "btn btn-primary mb-1" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md">
+            <h3>Novo Item</h3>
+
+            @using (Html.BeginForm("CriarEditarAusencias",
+                "Config",
+                new { equipe = ViewBag.equipe },
+                FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="Nome">Nome</label>
+                    <input type="text" name="Nome" class="form-control" placeholder="Nome" />
+
+                    <label for="Data"></label>
+                    <input type="text" id="datepicker" name="Data" class="form-control" placeholder="Data" />
+
+                    <label for="Motivo">Motivo</label>
+                    <input type="text" name="Motivo" class="form-control" placeholder="Motivo" />
+
+                    <label for="Valido">Válido</label>
+                    <input type="checkbox" name="Valido" class="checkbox form-control" placeholder="Válido" />
+                   
+
+                    <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning mt-2" role="alert">
+                            Erro ao criar Ausência: @Html.ValidationMessage("Error")
+                        </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {           
+            $("#datepicker").datepicker();
+        });
+    </script>
+
+}
+
+
+
+
+

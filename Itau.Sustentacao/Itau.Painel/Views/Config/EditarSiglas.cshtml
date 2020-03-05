@@ -1,0 +1,80 @@
+﻿@using Itau.Common 
+@model List<Itau.Models.Sigla>
+
+<div class="container bg-light">
+
+    <div class="row">
+        <div class="col-md">
+            @Html.ActionLink("Voltar", "EditarSquad", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary mt-2 mb-4" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <h3>Siglas</h3>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <span class="font-weight-bold">Sigla</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <span class="font-weight-bold">Tipo</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span></span>
+                    </div>
+                </div>
+
+                @foreach (Itau.Models.Sigla item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <span>@item.CodSigla</span>
+                        </div>
+                        <div class="col-sm-5">
+                            <span>@item.Tipo.GetDescription()</span>
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.ActionLink("Excluir", "ExcluirSigla", "Config", new { equipe = ViewBag.equipe, sigla = item.CodSigla }, new { @class = "btn btn-primary mb-1" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md">
+            <h3>Nova Sigla</h3>
+
+            @using (Html.BeginForm("CriarEditarSigla", "Config", new { equipe = ViewBag.equipe }, FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="Nome">Código da Sigla</label>
+                    <input type="text" name="CodSigla" class="form-control" placeholder="Código da Sigla" />
+
+                    <label for="Nome">Tipo da Sigla</label>
+
+                    <select class="form-control" name="Tipo">
+                        <option value="1">Ambos</option>
+                        <option value="2">Mainframe</option>
+                        <option value="3">Distribuída</option>
+                        <option value="4">Outros</option>
+                    </select>
+
+                    <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning mt-2" role="alert">
+                            Erro ao criar Sigla: @Html.ValidationMessage("Error")
+                        </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+
