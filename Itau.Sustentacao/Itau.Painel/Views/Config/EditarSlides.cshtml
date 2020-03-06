@@ -1,0 +1,152 @@
+﻿@using Itau.Common
+@model List<Itau.Models.Slide>
+
+<div class="container bg-light">
+
+    <div class="row">
+        <div class="col-md">
+            @Html.ActionLink("Voltar", "EditarSquad", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary mt-2 mb-4" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <h3>Slides</h3>
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-2">
+                        <span class="font-weight-bold">Id</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Nome</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Tipo</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Tempo</span>
+                    </div>
+                    <div class="col-sm-1">
+                        <span></span>
+                    </div>
+                </div>
+
+                @foreach (Itau.Models.Slide item in Model)
+                {
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <span>@item.Id</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.Nome</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.Tipo.GetDescription()</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span>@item.Tempo</span>
+                        </div>
+                        <div class="col-sm-1">
+                            @Html.ActionLink("X", "ExcluirSlide", "Config", new { equipe = ViewBag.equipe, idSlide = item.Id }, new { @class = "btn btn-primary mb-1" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md">
+            <h3>Novo Item</h3>
+
+            @using (Html.BeginForm("CriarEditarSlide",
+                "Config",
+                new { equipe = ViewBag.equipe },
+                FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                <div class="form-group">
+                    <label for="Nome">Nome</label>
+                    <input type="text" name="Nome" class="form-control" placeholder="Nome" />
+
+                    <label for="Tipo">Tipo</label>
+                    <select id="Tipo" class="form-control" name="Tipo">
+                        <option value="1">Imagem</option>
+                        <option value="2">Vídeo</option>
+                        @*<option value="3">Literal</option>*@
+                        <option value="4">Gestão Visual</option>
+                        <option value="5">Embed</option>
+                    </select>
+
+                    <label for="Tempo">Tempo</label>
+                    <input type="number" name="Tempo" class="form-control" placeholder="Tempo de transição em ms" />
+
+                    <label for="Conteudo">Conteúdo</label>
+                    <input id="Conteudo" type="file" name="Conteudo" class="form-control" placeholder="Conteúdo" accept=".png" />
+
+                    <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning mt-2" role="alert">
+                            Erro ao criar Ausência: @Html.ValidationMessage("Error")
+                        </div>
+                    }
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $("#Tipo").change(function () {
+            var opcaoSelecionada = $(this).val();
+            switch (opcaoSelecionada) {
+                case "1":
+                    {                       
+                        $("#Conteudo").attr("type", "file");
+                        $("#Conteudo").attr("accept", ".png");
+                        $("#Conteudo").show();
+                        
+                        break;
+                    }
+                case "2":
+                    {   
+                        $("#Conteudo").attr("type", "file");
+                        $("#Conteudo").attr("accept", ".mp4");
+                        $("#Conteudo").show();
+                        break;
+                    }
+                case "4":
+                    {   
+                        $("#Conteudo").removeAttr("accept");
+                        $("#Conteudo").hide();
+                        break;
+                    }
+                case "5":
+                    {
+                        $("#Conteudo").attr("type", "text");
+                        $("#Conteudo").attr("placeholder", "Insira o link");
+                        $("#Conteudo").removeAttr("accept");
+                        $("#Conteudo").show();                        
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+
+
+        });
+
+    </script>
+
+}
+
+

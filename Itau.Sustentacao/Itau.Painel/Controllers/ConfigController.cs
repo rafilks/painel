@@ -38,14 +38,7 @@ namespace Itau.Controllers
                         Directory.CreateDirectory(Server.MapPath($"~/Dados/{novaEquipe.Nome}/Arquivos"));
                         Directory.CreateDirectory(Server.MapPath($"~/Dados/{novaEquipe.Nome}/Arquivos/Time"));
 
-                        string caminhoArquivoSlides = Path.Combine(Server.MapPath($"~/Dados/{novaEquipe.Nome}"), $"slides-{novaEquipe.Nome}.json");
-                        string caminhoArquivoConfig = Path.Combine(Server.MapPath($"~/Dados/{novaEquipe.Nome}"), $"config-{novaEquipe.Nome}.json");
-
-                        using (StreamWriter slidesWriter = new StreamWriter(caminhoArquivoSlides))
-                        {
-                            slidesWriter.WriteLine("[{}]");
-                        }
-
+                        SalvarConfiguracaoSlides(novaEquipe.Nome, new List<Slide>(), true);
                         SalvarConfiguracao(novaEquipe.Nome, new Configuracao(), true);
 
                         return RedirectToAction("EditarSquad", "Config", new { equipe = novaEquipe.Nome });
@@ -58,7 +51,6 @@ namespace Itau.Controllers
 
                         return View("Criar", novaEquipe);
                     }
-
                 }
                 else
                 {
@@ -319,7 +311,7 @@ namespace Itau.Controllers
                 return RedirectToAction("EditarAusencias", "Config", new { equipe = equipe });
 
             }
-            return RedirectToAction("EditarAusencias", "Config", new { equipe = equipe });            
+            return RedirectToAction("EditarAusencias", "Config", new { equipe = equipe });
         }
 
         [HttpGet]
@@ -435,7 +427,7 @@ namespace Itau.Controllers
                 }
                 else
                 {
-                    objUpdate.Funcionario = plantao.Funcionario;                   
+                    objUpdate.Funcionario = plantao.Funcionario;
                     objUpdate.DataInicio = plantao.DataInicio;
                     objUpdate.DataFim = plantao.DataFim;
                     objUpdate.Plataforma = plantao.Plataforma;
@@ -470,12 +462,149 @@ namespace Itau.Controllers
 
         #endregion
 
+        #region Cerimonia
 
+        [HttpGet]
+        public ActionResult EditarCerimonias(string equipe)
+        {
+            Configuracao config = new Configuracao();
+            if (!string.IsNullOrEmpty(equipe))
+            {
+                config = LeConfiguracao(equipe);
+            }
+            return View(config.InfoCerimonias);
+        }
+
+        [HttpPost]
+        public ActionResult CriarEditarCerimonia(string equipe, Cerimonia cerimonia)
+        {
+            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(cerimonia.Descricao))
+            {
+                var configToSave = LeConfiguracao(equipe);
+
+                var objUpdate = configToSave.InfoCerimonias.FirstOrDefault(i => i.Descricao == cerimonia.Descricao);
+                if (objUpdate == null)
+                {
+                    configToSave.InfoCerimonias.Add(cerimonia);
+                }
+                else
+                {
+                    objUpdate.Descricao = cerimonia.Descricao;
+                    objUpdate.Data = cerimonia.Data;
+                    objUpdate.Hora = cerimonia.Hora;
+                }
+
+                SalvarConfiguracao(equipe, configToSave);
+                return RedirectToAction("EditarCerimonias", "Config", new { equipe = equipe });
+            }
+            return RedirectToAction("EditarCerimonias", "Config", new { equipe = equipe });
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirCerimonia(string equipe, string descricao)
+        {
+            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(descricao))
+            {
+                var configToSave = LeConfiguracao(equipe);
+
+                var objUpdate = configToSave.InfoCerimonias.FirstOrDefault(x => x.Descricao == descricao);
+                if (objUpdate != null)
+                {
+                    configToSave.InfoCerimonias.Remove(objUpdate);
+                }
+
+                SalvarConfiguracao(equipe, configToSave);
+
+                return RedirectToAction("EditarCerimonia", "Config", new { equipe = equipe });
+            }
+            return RedirectToAction("EditarCerimonia", "Config", new { equipe = equipe });
+        }
+        #endregion
+
+        #region Slides
+
+        [HttpGet]
+        public ActionResult EditarSlides(string equipe)
+        {
+            List<Slide> slides = new List<Slide>();
+
+            if (!string.IsNullOrEmpty(equipe))
+            {
+                slides = LeConfiguracaoSlides(equipe);
+            }
+            return View(slides);
+        }
+
+        [HttpPost]
+        public ActionResult CriarEditarSlide(string equipe, Slide slide)
+        {
+            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(slide.Nome))
+            {
+                var configToSave = LeConfiguracaoSlides(equipe);
+
+                if (Request.Files.Count > 0)
+                {
+                    var file = Request.Files[0];
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath($"~/Dados/{equipe}/arquivos/"), fileName);
+                        var caminhoArquivo = $"/Dados/{equipe}/arquivos/{fileName}";
+
+                        file.SaveAs(path);
+                        slide.Conteudo = caminhoArquivo;
+                    }
+                }
+
+                var objUpdate = configToSave.FirstOrDefault(i => i.Id == slide.Id);
+                if (objUpdate == null)
+                {
+                    var ultimoItem = configToSave.OrderByDescending(s => s.Id).FirstOrDefault();
+                    slide.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;                   
+                    configToSave.Add(slide);
+                }
+                else
+                {
+                    objUpdate.Nome = slide.Nome;
+                    objUpdate.Tipo = slide.Tipo;
+                    objUpdate.Tempo = slide.Tempo;
+                    objUpdate.Conteudo = string.IsNullOrEmpty(slide.Conteudo) ? objUpdate.Conteudo : slide.Conteudo;
+                }
+
+                SalvarConfiguracaoSlides(equipe, configToSave);
+                return RedirectToAction("EditarSlides", "Config", new { equipe = equipe });
+            }
+            return RedirectToAction("EditarSlides", "Config", new { equipe = equipe });
+        }
+
+        [HttpGet]
+        public ActionResult ExcluirSlide(string equipe, int idSlide)
+        {
+            if (!string.IsNullOrEmpty(equipe) && idSlide > 0)
+            {
+                var configToSave = LeConfiguracaoSlides(equipe);
+
+                var objUpdate = configToSave.FirstOrDefault(x => x.Id == idSlide);
+                if (objUpdate != null)
+                {
+                    configToSave.Remove(objUpdate);
+                }
+                SalvarConfiguracaoSlides(equipe, configToSave);
+
+                return RedirectToAction("EditarSlides", "Config", new { equipe = equipe });
+            }
+            return RedirectToAction("EditarSlides", "Config", new { equipe = equipe });
+        }
+
+        #endregion
 
         #region Manipula Arquivo Configuração
 
         private Configuracao LeConfiguracao(string equipe)
         {
+
+
             Configuracao config = new Configuracao();
 
             ViewBag.equipe = equipe;
@@ -532,9 +661,63 @@ namespace Itau.Controllers
 
         }
 
-
         #endregion
 
-    }
+        #region Manipula Arquivo Slides
 
+        private List<Slide> LeConfiguracaoSlides(string equipe)
+        {
+            List<Slide> slides = new List<Slide>();
+
+            ViewBag.equipe = equipe;
+            ViewBag.logo_equipe = $"/Dados/{equipe}/arquivos/logo.png";
+            ViewBag.bannerEquipe = $"/Imagens/banner.png";
+            ViewBag.mensagemSucesso = TempData["mensagemSucesso"] != null ? TempData["mensagemSucesso"].ToString() : String.Empty;
+
+            if (!string.IsNullOrEmpty(equipe))
+            {
+                try
+                {
+                    using (StreamReader sr = new StreamReader(Server.MapPath($"~/Dados/{equipe}/slides-{equipe}.json"), encoding))
+                    {
+                        string conteudo = sr.ReadToEnd();
+
+                        if (!string.IsNullOrEmpty(equipe))
+                        {
+                            slides = JsonConvert.DeserializeObject<List<Slide>>(conteudo, settings);
+                        }
+                    }
+                }
+
+                catch (FileNotFoundException ex)
+                {
+                    ViewBag.mensagemErro = ex.Message;
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.mensagemErro = ex.Message;
+                }
+            }
+            return slides;
+        }
+
+        private void SalvarConfiguracaoSlides(string equipe, List<Slide> slidesToSave, bool criacao = false)
+        {
+            string caminhoArquivoConfig = Path.Combine(Server.MapPath($"~/Dados/{equipe}"), $"slides-{equipe}.json");
+
+            using (StreamWriter configWriter = new StreamWriter(System.IO.File.Open(caminhoArquivoConfig, FileMode.Create), encoding))
+            {
+                var result = JsonConvert.SerializeObject(slidesToSave, Formatting.Indented, settings);
+
+                configWriter.WriteLine(result);
+                if (!criacao)
+                {
+                    TempData["mensagemSucesso"] = "Configuração atualizada com sucesso";
+                }
+            }
+        }
+
+
+        #endregion
+    }
 }

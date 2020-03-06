@@ -60,26 +60,29 @@
                 </div>
             }
 
-            <div class="btn-toolbar" role="toolbar" aria-label="Ações">
-                <div class="btn-group mr-2" role="group" aria-label="Siglas">
-                    @Html.ActionLink("Siglas", "EditarSiglas", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                <div class="btn-toolbar" role="toolbar" aria-label="Ações">
+                    <div class="btn-group mr-2" role="group" aria-label="Siglas">
+                        @Html.ActionLink("Siglas", "EditarSiglas", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="NossoTime">
+                        @Html.ActionLink("Nosso Time", "EditarNossoTime", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Ausências Programadas">
+                        @Html.ActionLink("Ausências Programadas", "EditarAusencias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Férias">
+                        @Html.ActionLink("Férias", "EditarFerias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Plantões">
+                        @Html.ActionLink("Plantões", "EditarPlantao", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="btn-group mr-2" role="group" aria-label="Slides">
+                        @Html.ActionLink("Cerimônia", "EditarCerimonias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Slides">
+                        @Html.ActionLink("Slides", "EditarSlides", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
+                    </div>
                 </div>
-                <div class="btn-group mr-2" role="group" aria-label="NossoTime">
-                    @Html.ActionLink("Nosso Time", "EditarNossoTime", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
-                </div>
-                <div class="btn-group mr-2" role="group" aria-label="Ausências Programadas">
-                    @Html.ActionLink("Ausências Programadas", "EditarAusencias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
-                </div>
-                <div class="btn-group mr-2" role="group" aria-label="Férias">
-                    @Html.ActionLink("Férias", "EditarFerias", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
-                </div>
-                <div class="btn-group mr-2" role="group" aria-label="Plantões">
-                    @Html.ActionLink("Plantões", "EditarPlantao", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
-                </div>
-                <div class="btn-group" role="group" aria-label="Slides">
-                    @Html.ActionLink("Slides", "EditarSlides", "Slides", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary" })
-                </div>
-            </div>
 
         </div>
     </div>

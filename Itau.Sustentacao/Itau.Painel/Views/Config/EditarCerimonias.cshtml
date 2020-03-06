@@ -1,0 +1,87 @@
+﻿@using Itau.Common
+@model List<Itau.Models.Cerimonia>
+
+<div class="container bg-light">
+
+    <div class="row">
+        <div class="col-md">
+            @Html.ActionLink("Voltar", "EditarSquad", "Config", new { equipe = ViewBag.equipe }, new { @class = "btn btn-primary mt-2 mb-4" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <h3>Cerimônia</h3>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Descrição</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Data</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="font-weight-bold">Hora</span>
+                    </div>                   
+                    <div class="col-sm-3">
+                        <span></span>
+                    </div>
+                </div>
+
+                @foreach (Itau.Models.Cerimonia item in Model)
+                {
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>@item.Descricao</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span>@item.Data</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span>@item.Hora</span>
+                    </div>                   
+                    <div class="col-sm-3">
+                        @Html.ActionLink("X", "ExcluirCerimonia", "Config", new { equipe = ViewBag.equipe, descricao = item.Descricao }, new { @class = "btn btn-primary mb-1" })
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="col-md">
+            <h3>Novo Item</h3>
+
+            @using (Html.BeginForm("CriarEditarCerimonia",
+                "Config",
+                new { equipe = ViewBag.equipe },
+                FormMethod.Post))
+            {
+            <div class="form-group">
+                <label for="Descricao">Descrição</label>
+                <input type="text" name="Descricao" class="form-control" placeholder="Nome da Cerimônia" />
+
+                <label for="Data">Data</label>
+                <input type="text" name="Data" class="form-control" placeholder="Ex: Diariamente, Todos os dias, etc" />
+
+                <label for="Hora">Hora</label>
+                <input type="text" name="Hora" class="form-control" placeholder="Descrição do horário" />
+
+                <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-warning mt-2" role="alert">
+                        Erro ao criar Ausência: @Html.ValidationMessage("Error")
+                    </div>
+                }
+            </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+
+

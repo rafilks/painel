@@ -5,13 +5,11 @@ using System.Web;
 
 namespace Itau.Models
 {
-    
+
     public class Configuracao
     {
         public string NomeSquad { get; set; }
-        public string Proposito { get; set; }
-        //public HttpPostedFileBase Logo { get; set; }
-        public List<Cerimonia> InfoCerimonia { get; set; }
+        public string Proposito { get; set; }        
         public List<Sigla> Siglas { get; set; }
         public List<NossoTime> NossoTime { get; set; }
         public List<AusenciaProgramada> AusenciaProgramada { get; set; }
@@ -23,7 +21,6 @@ namespace Itau.Models
         {
             NomeSquad = string.Empty;
             Proposito = string.Empty;
-            InfoCerimonia = new List<Cerimonia>();
             Siglas = new List<Sigla>();
             NossoTime = new List<NossoTime>();
             AusenciaProgramada = new List<AusenciaProgramada>();
@@ -35,7 +32,7 @@ namespace Itau.Models
     public class DadosPlantao
     {
         public string Funcionario { get; set; }
-        public bool Valido { get; set; }        
+        public bool Valido { get; set; }
         public string Plataforma { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
@@ -68,20 +65,29 @@ namespace Itau.Models
         public string Tipo { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
-        public string DataDisplay {
-            get {
-                return DataInicio.ToString("dd/MM") + "-" + DataFim.ToString("dd/MM");
+        public string DataDisplay
+        {
+            get
+            {
+
+                if (DataInicio == DateTime.MinValue || DataFim == DateTime.MinValue)
+                {
+                    return "";
+                }
+                else
+                {
+                    return DataInicio.ToString("dd/MM") + "-" + DataFim.ToString("dd/MM");
+                }
             }
         }
         public List<MesFerias> Meses { get; set; }
-    }    
+    }
     public class Cerimonia
     {
         public string Descricao { get; set; }
         public string Data { get; set; }
         public string Hora { get; set; }
     }
-
     public class Sigla
     {
         public string CodSigla { get; set; }

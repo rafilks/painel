@@ -1,1 +1,26 @@
-[{}]
+[
+  {
+    "Id": 2,
+    "Equipe": "tem",
+    "Nome": "Slide Imagem",
+    "Tipo": 1,
+    "Tempo": 1000,
+    "Conteudo": null
+  },
+  {
+    "Id": 1,
+    "Equipe": "tem",
+    "Nome": "Slide Video",
+    "Tipo": 2,
+    "Tempo": 5000,
+    "Conteudo": null
+  },
+  {
+    "Id": 3,
+    "Equipe": "tem",
+    "Nome": "Jira",
+    "Tipo": 5,
+    "Tempo": 5000,
+    "Conteudo": "https://www.uol.com.br/"
+  }
+]

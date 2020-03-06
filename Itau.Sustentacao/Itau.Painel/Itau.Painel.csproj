@@ -326,6 +326,8 @@
     <Content Include="Views\Config\EditarAusencias.cshtml" />
     <Content Include="Views\Config\EditarFerias.cshtml" />
     <Content Include="Views\Config\EditarPlantao.cshtml" />
+    <Content Include="Views\Config\EditarCerimonias.cshtml" />
+    <Content Include="Views\Config\EditarSlides.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
