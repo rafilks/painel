@@ -150,13 +150,17 @@ namespace Itau.Controllers
             if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(sigla.CodSigla))
             {
                 var configToSave = LeConfiguracao(equipe);
-                var objUpdate = configToSave.Siglas.FirstOrDefault(s => s.CodSigla == sigla.CodSigla);
+                var objUpdate = configToSave.Siglas.FirstOrDefault(x => x.Id == sigla.Id);
                 if (objUpdate == null)
                 {
+                    var ultimoItem = configToSave.Siglas.OrderByDescending(s => s.Id).FirstOrDefault();
+                    sigla.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
+
                     configToSave.Siglas.Add(sigla);
                 }
                 else
                 {
+                    objUpdate.CodSigla = sigla.CodSigla;
                     objUpdate.Tipo = sigla.Tipo;
                 }
 
@@ -170,13 +174,13 @@ namespace Itau.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExcluirSigla(string equipe, string sigla)
+        public ActionResult ExcluirSigla(string equipe, int Id)
         {
-            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(sigla))
+            if (!string.IsNullOrEmpty(equipe))
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.Siglas.FirstOrDefault(s => s.CodSigla == sigla);
+                var objUpdate = configToSave.Siglas.FirstOrDefault(x => x.Id == Id);
                 if (objUpdate != null)
                 {
                     configToSave.Siglas.Remove(objUpdate);
@@ -227,13 +231,17 @@ namespace Itau.Controllers
                     }
                 }
 
-                var objUpdate = configToSave.NossoTime.FirstOrDefault(n => n.Nome == nossoTime.Nome);
+                var objUpdate = configToSave.NossoTime.FirstOrDefault(x => x.Id == nossoTime.Id);
                 if (objUpdate == null)
                 {
+                    var ultimoItem = configToSave.NossoTime.OrderByDescending(x => x.Id).FirstOrDefault();
+                    nossoTime.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
+
                     configToSave.NossoTime.Add(nossoTime);
                 }
                 else
                 {
+                    objUpdate.Nome = nossoTime.Nome;
                     objUpdate.Papel = nossoTime.Papel;
                     objUpdate.Principal = nossoTime.Principal;
                     objUpdate.TipoPapel = nossoTime.TipoPapel;
@@ -250,13 +258,13 @@ namespace Itau.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExcluirNossoTime(string equipe, string nome)
+        public ActionResult ExcluirNossoTime(string equipe, int id)
         {
-            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(nome))
+            if (!string.IsNullOrEmpty(equipe))
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.NossoTime.FirstOrDefault(x => x.Nome == nome);
+                var objUpdate = configToSave.NossoTime.FirstOrDefault(x => x.Id == id);
                 if (objUpdate != null)
                 {
                     configToSave.NossoTime.Remove(objUpdate);
@@ -289,13 +297,16 @@ namespace Itau.Controllers
         [HttpPost]
         public ActionResult CriarEditarAusencias(string equipe, AusenciaProgramada ausencia)
         {
-            if (!string.IsNullOrEmpty(equipe))
+            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(ausencia.Nome))
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.AusenciaProgramada.FirstOrDefault(n => n.Nome == ausencia.Nome);
+                var objUpdate = configToSave.AusenciaProgramada.FirstOrDefault(n => n.Id == ausencia.Id);
                 if (objUpdate == null)
                 {
+                    var ultimoItem = configToSave.AusenciaProgramada.OrderByDescending(x => x.Id).FirstOrDefault();
+                    ausencia.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
+
                     configToSave.AusenciaProgramada.Add(ausencia);
                 }
                 else
@@ -303,7 +314,7 @@ namespace Itau.Controllers
                     objUpdate.Nome = ausencia.Nome;
                     objUpdate.Data = ausencia.Data;
                     objUpdate.Motivo = ausencia.Motivo;
-                    objUpdate.Valido = ausencia.Valido;
+                    //objUpdate.Valido = ausencia.Valido;
                 }
 
                 SalvarConfiguracao(equipe, configToSave);
@@ -315,14 +326,14 @@ namespace Itau.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExcluirAusencias(string equipe, string nome)
+        public ActionResult ExcluirAusencias(string equipe, int id)
         {
-            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(nome))
+            if (!string.IsNullOrEmpty(equipe))
             {
 
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.AusenciaProgramada.FirstOrDefault(x => x.Nome == nome);
+                var objUpdate = configToSave.AusenciaProgramada.FirstOrDefault(x => x.Id == id);
                 if (objUpdate != null)
                 {
                     configToSave.AusenciaProgramada.Remove(objUpdate);
@@ -358,9 +369,12 @@ namespace Itau.Controllers
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.Ferias.FirstOrDefault(n => n.Nome == ferias.Nome);
+                var objUpdate = configToSave.Ferias.FirstOrDefault(x => x.Id == ferias.Id);
                 if (objUpdate == null)
                 {
+                    var ultimoItem = configToSave.Ferias.OrderByDescending(x => x.Id).FirstOrDefault();
+                    ferias.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
+
                     configToSave.Ferias.Add(ferias);
                 }
                 else
@@ -378,14 +392,13 @@ namespace Itau.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExcluirFerias(string equipe, string nome)
+        public ActionResult ExcluirFerias(string equipe, int id)
         {
-            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(nome))
+            if (!string.IsNullOrEmpty(equipe))
             {
-
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.Ferias.FirstOrDefault(x => x.Nome == nome);
+                var objUpdate = configToSave.Ferias.FirstOrDefault(x => x.Id == id);
                 if (objUpdate != null)
                 {
                     configToSave.Ferias.Remove(objUpdate);
@@ -420,17 +433,20 @@ namespace Itau.Controllers
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.DadosPlantao.FirstOrDefault(p => p.Plataforma == plantao.Plataforma);
+                var objUpdate = configToSave.DadosPlantao.FirstOrDefault(x => x.Id == plantao.Id);
                 if (objUpdate == null)
                 {
+                    var ultimoItem = configToSave.DadosPlantao.OrderByDescending(x => x.Id).FirstOrDefault();
+                    plantao.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
+
                     configToSave.DadosPlantao.Add(plantao);
                 }
                 else
                 {
+                    objUpdate.Plataforma = plantao.Plataforma;
                     objUpdate.Funcionario = plantao.Funcionario;
                     objUpdate.DataInicio = plantao.DataInicio;
-                    objUpdate.DataFim = plantao.DataFim;
-                    objUpdate.Plataforma = plantao.Plataforma;
+                    objUpdate.DataFim = plantao.DataFim;                    
                 }
 
                 SalvarConfiguracao(equipe, configToSave);
@@ -440,14 +456,13 @@ namespace Itau.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExcluirPlantao(string equipe, string plataforma)
+        public ActionResult ExcluirPlantao(string equipe, int id)
         {
-            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(plataforma))
+            if (!string.IsNullOrEmpty(equipe))
             {
-
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.DadosPlantao.FirstOrDefault(x => x.Plataforma == plataforma);
+                var objUpdate = configToSave.DadosPlantao.FirstOrDefault(x => x.Id == id);
                 if (objUpdate != null)
                 {
                     configToSave.DadosPlantao.Remove(objUpdate);
@@ -482,9 +497,12 @@ namespace Itau.Controllers
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.InfoCerimonias.FirstOrDefault(i => i.Descricao == cerimonia.Descricao);
+                var objUpdate = configToSave.InfoCerimonias.FirstOrDefault(x => x.Id == cerimonia.Id);
                 if (objUpdate == null)
                 {
+                    var ultimoItem = configToSave.InfoCerimonias.OrderByDescending(x => x.Id).FirstOrDefault();
+                    cerimonia.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
+
                     configToSave.InfoCerimonias.Add(cerimonia);
                 }
                 else
@@ -501,13 +519,13 @@ namespace Itau.Controllers
         }
 
         [HttpGet]
-        public ActionResult ExcluirCerimonia(string equipe, string descricao)
+        public ActionResult ExcluirCerimonia(string equipe, int id)
         {
-            if (!string.IsNullOrEmpty(equipe) && !string.IsNullOrEmpty(descricao))
+            if (!string.IsNullOrEmpty(equipe))
             {
                 var configToSave = LeConfiguracao(equipe);
 
-                var objUpdate = configToSave.InfoCerimonias.FirstOrDefault(x => x.Descricao == descricao);
+                var objUpdate = configToSave.InfoCerimonias.FirstOrDefault(x => x.Id == id);
                 if (objUpdate != null)
                 {
                     configToSave.InfoCerimonias.Remove(objUpdate);
@@ -557,11 +575,11 @@ namespace Itau.Controllers
                     }
                 }
 
-                var objUpdate = configToSave.FirstOrDefault(i => i.Id == slide.Id);
+                var objUpdate = configToSave.FirstOrDefault(x => x.Id == slide.Id);
                 if (objUpdate == null)
                 {
-                    var ultimoItem = configToSave.OrderByDescending(s => s.Id).FirstOrDefault();
-                    slide.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;                   
+                    var ultimoItem = configToSave.OrderByDescending(x => x.Id).FirstOrDefault();
+                    slide.Id = ultimoItem != null ? ultimoItem.Id + 1 : 1;
                     configToSave.Add(slide);
                 }
                 else

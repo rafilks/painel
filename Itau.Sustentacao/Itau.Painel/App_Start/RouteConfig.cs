@@ -13,29 +13,17 @@ namespace Itau
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            // routes.MapRoute(
-            //  name: "Paineis",
-            //  url: "",
-            //  defaults: new { controller = "Painel", action = "Index"}
-            //);
-
-            // routes.MapRoute(
-            //   name: "Painel",
-            //   url: "{equipe}",
-            //   defaults: new { controller = "Painel", action = "Index", equipe = "{equipe}" }
-            // );
-
-            // routes.MapRoute(
-            //    name: "Configuração",
-            //    url: "{equipe}/config",
-            //    defaults: new { controller = "Config", action = "EditarSquad", equipe = "{equipe}" }
-            //  );
+            routes.MapRoute(
+              name: "Painel",
+              url: "{equipe}",
+              defaults: new { controller = "Painel", action = "Index", equipe = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{equipe}",
-                defaults: new { controller = "Painel", action = "Index", equipe = UrlParameter.Optional }
-            );
+               name: "Configuração",
+               url: "{equipe}/config/{action}",
+               defaults: new { controller = "Config", action = "EditarSquad", equipe = "{equipe}" }
+             );        
         }
     }
 }

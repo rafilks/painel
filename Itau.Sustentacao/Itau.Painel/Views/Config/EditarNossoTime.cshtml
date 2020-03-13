@@ -31,18 +31,30 @@
 
                 @foreach (Itau.Models.NossoTime item in Model)
                 {
-                    <div class="row">
+                    <div class="row" data-id="@item.Id">
                         <div class="col-sm-3">
-                            <span>@item.Nome</span>
+                            <span data-nome="@item.Nome">@item.Nome</span>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <span data-tipopapel="@item.TipoPapel">@item.TipoPapel.GetDescription()</span>
                         </div>
                         <div class="col-sm-3">
-                            <span>@item.TipoPapel.GetDescription()</span>
+                            <span data-ausencia="@item.Ausencia">@item.Ausencia</span>
                         </div>
-                        <div class="col-sm-3">
-                            <span>@item.Ausencia</span>
+
+                        <!--Campos ocultos-->
+                        <div style="display:none;">
+                            <span data-principal="@item.Principal">@item.Principal</span>
                         </div>
+                        <div style="display:none;">
+                            <span data-papel="@item.Papel">@item.Papel</span>
+                        </div>
+
+
                         <div class="col-sm-3">
-                            @Html.ActionLink("Excluir", "ExcluirNossoTime", "Config", new { equipe = ViewBag.equipe, nome = item.Nome }, new { @class = "btn btn-primary mb-1" })
+                            <input type="button" class="btn btn-primary mb-1" value="Editar" onclick="javascript:CopiarEdicao('@item.Id')" />
+                            @Html.ActionLink("X", "ExcluirNossoTime", "Config", new { equipe = ViewBag.equipe, id = item.Id }, new { @class = "btn btn-primary mb-1" })
                         </div>
                     </div>
                 }
@@ -51,13 +63,16 @@
         <div class="col-md">
             <h3>Novo Item</h3>
 
-            @using (Html.BeginForm("CriarEditarNossoTime", 
-                "Config", 
-                new { equipe = ViewBag.equipe }, 
+            @using (Html.BeginForm("CriarEditarNossoTime",
+                "Config",
+                new { equipe = ViewBag.equipe },
                 FormMethod.Post,
                 new { enctype = "multipart/form-data" }))
             {
                 <div class="form-group">
+
+                    <input type="hidden" name="Id" />
+
                     <label for="Nome">Nome</label>
                     <input type="text" name="Nome" class="form-control" placeholder="Nome" />
 
@@ -66,10 +81,10 @@
 
                     <label for="TipoPapel">Tipo de Papel</label>
                     <select class="form-control" name="TipoPapel">
-                        <option value="1">Product Owner</option>
-                        <option value="2">Team Lead</option>
-                        <option value="3">Tech Lead</option>
-                        <option value="4">Team Member</option>
+                        <option value="PO">Product Owner</option>
+                        <option value="TL">Team Lead</option>
+                        <option value="Tcl">Tech Lead</option>
+                        <option value="Tm">Team Member</option>
                     </select>
 
                     <label for="Papel">Descrição Papel</label>
@@ -103,4 +118,34 @@
 </div>
 
 
+@section scripts {
 
+    <script type="text/javascript">
+        function CopiarEdicao(id) {
+            var nossoTime = {};
+
+            if (id != "" && id != undefined) {
+                var itemUpdate = $(".row[data-id='" + id + "']");
+
+                nossoTime.Id = id;
+                nossoTime.Nome = itemUpdate.find("span[data-nome]").data("nome");
+                nossoTime.Principal = itemUpdate.find("span[data-principal]").data("principal");
+                nossoTime.TipoPaPel = itemUpdate.find("span[data-tipopapel]").data("tipopapel");
+                nossoTime.Ausencia = itemUpdate.find("span[data-ausencia]").data("ausencia");
+                nossoTime.Papel = itemUpdate.find("span[data-papel]").data("papel");
+
+                console.log(nossoTime);
+
+                //popula campos
+                $("input[name='Id']").val(nossoTime.Id);
+                $("input[name='Nome']").val(nossoTime.Nome);
+                $("input[name='Principal']").val(nossoTime.Principal);
+                $("select[name='TipoPapel']").val(nossoTime.TipoPaPel);
+                $("select[name='Ausencia']").val(nossoTime.Ausencia);
+                $("input[name='Papel']").val(nossoTime.Papel);               
+            }
+        }
+
+    </script>
+
+}

@@ -31,18 +31,19 @@
 
                 @foreach (Itau.Models.AusenciaProgramada item in Model)
                 {
-                    <div class="row">
+                    <div class="row" data-id="@item.Id">
                         <div class="col-sm-3">
-                            <span>@item.Nome</span>
+                            <span data-nome="@item.Nome">@item.Nome</span>
                         </div>
                         <div class="col-sm-3">
-                            <span>@item.Data.ToString("dd-MM-yyyy")</span>
+                            <span data-data="@item.Data.ToString("dd-MM-yyyy")">@item.Data.ToString("dd-MM-yyyy")</span>
                         </div>
                         <div class="col-sm-3">
-                            <span>@item.Motivo</span>
+                            <span data-motivo="@item.Motivo">@item.Motivo</span>
                         </div>
                         <div class="col-sm-3">
-                            @Html.ActionLink("Excluir", "ExcluirAusencias", "Config", new { equipe = ViewBag.equipe, nome = item.Nome }, new { @class = "btn btn-primary mb-1" })
+                            <input type="button" class="btn btn-primary mb-1" value="Editar" onclick="javascript:CopiarEdicao('@item.Id')" />
+                            @Html.ActionLink("X", "ExcluirAusencias", "Config", new { equipe = ViewBag.equipe, id = item.Id }, new { @class = "btn btn-primary mb-1" })
                         </div>
                     </div>
                 }
@@ -56,29 +57,28 @@
                 new { equipe = ViewBag.equipe },
                 FormMethod.Post))
             {
-                <div class="form-group">
-                    <label for="Nome">Nome</label>
-                    <input type="text" name="Nome" class="form-control" placeholder="Nome" />
+            <div class="form-group">
 
-                    <label for="Data"></label>
-                    <input type="text" id="datepicker" name="Data" class="form-control" placeholder="Data" />
+                <input type="hidden" name="Id" />
 
-                    <label for="Motivo">Motivo</label>
-                    <input type="text" name="Motivo" class="form-control" placeholder="Motivo" />
+                <label for="Nome">Nome</label>
+                <input type="text" name="Nome" class="form-control" placeholder="Nome" />
 
-                    <label for="Valido">Válido</label>
-                    <input type="checkbox" name="Valido" class="checkbox form-control" placeholder="Válido" />
-                   
+                <label for="Data"></label>
+                <input type="text" id="datepicker" name="Data" class="form-control" placeholder="Data" />
 
-                    <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+                <label for="Motivo">Motivo</label>
+                <input type="text" name="Motivo" class="form-control" placeholder="Motivo" />
 
-                    @if (!ViewData.ModelState.IsValid)
-                    {
-                        <div class="alert alert-warning mt-2" role="alert">
-                            Erro ao criar Ausência: @Html.ValidationMessage("Error")
-                        </div>
-                    }
-                </div>
+                <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-warning mt-2" role="alert">
+                        Erro ao criar Ausência: @Html.ValidationMessage("Error")
+                    </div>
+                }
+            </div>
             }
 
 
@@ -90,14 +90,31 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {           
+        $(document).ready(function () {
             $("#datepicker").datepicker();
         });
+
+
+        function CopiarEdicao(id) {
+            var ausencia = {};
+
+            if (id != "" && id != undefined) {
+                var itemUpdate = $(".row[data-id='" + id + "']");
+
+                ausencia.Id = id;
+                ausencia.Nome = itemUpdate.find("span[data-nome]").data("nome");
+                ausencia.Data = itemUpdate.find("span[data-data]").data("data");
+                ausencia.Motivo = itemUpdate.find("span[data-motivo]").data("motivo");              
+
+                //popula campos
+                $("input[name='Id']").val(ausencia.Id);
+                $("input[name='Nome']").val(ausencia.Nome);
+                $("input[name='Data']").val(ausencia.Data);
+                $("input[name='Motivo']").val(ausencia.Motivo);              
+            }
+        }
+
+
     </script>
 
 }
-
-
-
-
-

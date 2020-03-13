@@ -164,9 +164,6 @@
     <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
     <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\jquery-ui.css" />
-    <Content Include="Content\jsoneditor\img\jsoneditor-icons.png" />
-    <Content Include="Content\jsoneditor\jsoneditor.css" />
-    <Content Include="Content\jsoneditor\jsoneditor.min.css" />
     <Content Include="Dados\ert\Imagens\banner.png" />
     <Content Include="Imagens\baby.png" />
     <Content Include="Dados\erto\Imagens\ferias-grid.jpg" />
@@ -220,8 +217,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jsoneditor\jsoneditor.js" />
-    <Content Include="Scripts\jsoneditor\jsoneditor.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -317,8 +312,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Painel\GestaoVisual.cshtml" />
-    <Content Include="Views\GerenciarPainel\index.cshtml" />
-    <Content Include="Scripts\jsoneditor\jsoneditor.map" />
     <Content Include="Views\Config\CriarEquipe.cshtml" />
     <Content Include="Views\Config\EditarSquad.cshtml" />
     <Content Include="Views\Config\EditarSiglas.cshtml" />

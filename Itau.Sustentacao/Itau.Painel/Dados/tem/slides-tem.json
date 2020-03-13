@@ -4,8 +4,8 @@
     "Equipe": "tem",
     "Nome": "Slide Imagem",
     "Tipo": 1,
-    "Tempo": 1000,
-    "Conteudo": null
+    "Tempo": 4000,
+    "Conteudo": "/Dados/tem/arquivos/primeiro.png"
   },
   {
     "Id": 1,
@@ -13,7 +13,7 @@
     "Nome": "Slide Video",
     "Tipo": 2,
     "Tempo": 5000,
-    "Conteudo": null
+    "Conteudo": "/Dados/tem/arquivos/SampleVideo.mp4"
   },
   {
     "Id": 3,
@@ -21,6 +21,14 @@
     "Nome": "Jira",
     "Tipo": 5,
     "Tempo": 5000,
-    "Conteudo": "https://www.uol.com.br/"
+    "Conteudo": "https://www.google.com.br/"
+  },
+  {
+    "Id": 4,
+    "Equipe": "tem",
+    "Nome": "Slide 2",
+    "Tipo": 1,
+    "Tempo": 1000,
+    "Conteudo": "/Dados/tem/arquivos/primeiro.png"
   }
 ]

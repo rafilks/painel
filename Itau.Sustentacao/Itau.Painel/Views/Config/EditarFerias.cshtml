@@ -31,20 +31,30 @@
 
                 @foreach (Itau.Models.Ferias item in Model)
                 {
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <span>@item.Nome</span>
-                        </div>
-                        <div class="col-sm-3">
-                            <span>@item.Tipo</span>
-                        </div>
-                        <div class="col-sm-3">
-                            <span>@item.DataDisplay</span>
-                        </div>
-                        <div class="col-sm-3">
-                            @Html.ActionLink("Excluir", "ExcluirFerias", "Config", new { equipe = ViewBag.equipe, nome = item.Nome }, new { @class = "btn btn-primary mb-1" })
-                        </div>
+                <div class="row" data-id="@item.Id">
+                    <div class="col-sm-3">
+                        <span data-nome="@item.Nome">@item.Nome</span>
                     </div>
+                    <div class="col-sm-3">
+                        <span data-tipo="@item.Tipo">@item.Tipo</span>
+                    </div>
+                    <div class="col-sm-3">
+                        <span>@item.DataDisplay</span>
+                    </div>
+
+                    <!--Campos ocultos-->
+                    <div style="display:none;">
+                        <span data-datainicio="@item.DataInicio.ToString("dd-MM-yyyy")">@item.DataInicio.ToString("dd-MM-yyyy")</span>
+                    </div>
+                    <div style="display:none">
+                        <span data-datafim="@item.DataFim.ToString("dd-MM-yyyy")">@item.DataFim.ToString("dd-MM-yyyy")</span>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <input type="button" class="btn btn-primary mb-1" value="Editar" onclick="javascript:CopiarEdicao('@item.Id')" />
+                        @Html.ActionLink("X", "ExcluirFerias", "Config", new { equipe = ViewBag.equipe, id = item.Id }, new { @class = "btn btn-primary mb-1" })
+                    </div>
+                </div>
                 }
             </div>
         </div>
@@ -57,6 +67,9 @@
                 FormMethod.Post))
             {
             <div class="form-group">
+
+                <input type="hidden" name="Id" />
+
                 <label for="Nome">Nome</label>
                 <input type="text" name="Nome" class="form-control" placeholder="Nome" />
 
@@ -72,7 +85,7 @@
                     <option value="Férias">Férias</option>
                     <option value="Maternidade">Maternidade</option>
                     <option value="Licença">Licença</option>
-                </select>            
+                </select>
 
                 <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
 
@@ -98,11 +111,29 @@
             $("#datepickerInicio").datepicker();
             $("#datepickerFim").datepicker();
         });
+
+        function CopiarEdicao(id) {
+            var ferias = {};
+
+            if (id != "" && id != undefined) {
+                var itemUpdate = $(".row[data-id='" + id + "']");
+
+                ferias.Id = id;
+                ferias.Nome = itemUpdate.find("span[data-nome]").data("nome");
+                ferias.DataInicio = itemUpdate.find("span[data-datainicio]").data("datainicio");
+                ferias.DataFim = itemUpdate.find("span[data-datafim]").data("datafim");
+                ferias.Tipo = itemUpdate.find("span[data-tipo]").data("tipo");             
+
+                //popula campos
+                $("input[name='Id']").val(ferias.Id);
+                $("input[name='Nome']").val(ferias.Nome);
+                $("input[name='DataInicio']").val(ferias.DataInicio);       
+                $("input[name='DataFim']").val(ferias.DataFim);       
+                $("select[name='Tipo']").val(ferias.Tipo);
+            }
+        }
+
+
     </script>
 
 }
-
-
-
-
-

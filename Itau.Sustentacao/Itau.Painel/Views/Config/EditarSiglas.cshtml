@@ -1,5 +1,6 @@
-﻿@using Itau.Common 
+﻿@using Itau.Common
 @model List<Itau.Models.Sigla>
+
 
 <div class="container bg-light">
 
@@ -10,7 +11,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md">
+        <div class="col-md-7">
             <h3>Siglas</h3>
 
             <div class="container">
@@ -28,36 +29,38 @@
 
                 @foreach (Itau.Models.Sigla item in Model)
                 {
-                    <div class="row">
+                    <div class="row" data-id="@item.Id">
                         <div class="col-sm-5">
-                            <span>@item.CodSigla</span>
+                            <span data-codsigla="@item.CodSigla">@item.CodSigla</span>
                         </div>
                         <div class="col-sm-5">
-                            <span>@item.Tipo.GetDescription()</span>
+                            <span data-tipo="@item.Tipo">@item.Tipo.GetDescription()</span>
                         </div>
                         <div class="col-sm-2">
-                            @Html.ActionLink("Excluir", "ExcluirSigla", "Config", new { equipe = ViewBag.equipe, sigla = item.CodSigla }, new { @class = "btn btn-primary mb-1" })
+                            <input type="button" class="btn btn-primary mb-1" value="Editar" onclick="javascript:CopiarEdicao('@item.Id')" />
+                            @Html.ActionLink("X", "ExcluirSigla", "Config", new { equipe = ViewBag.equipe, id = item.Id }, new { @class = "btn btn-primary mb-1" })
                         </div>
                     </div>
                 }
             </div>
         </div>
-        <div class="col-md">
+        <div class="col-md-5">
             <h3>Nova Sigla</h3>
 
             @using (Html.BeginForm("CriarEditarSigla", "Config", new { equipe = ViewBag.equipe }, FormMethod.Post))
             {
                 <div class="form-group">
+                    <input type="hidden" name="Id" />
+
                     <label for="Nome">Código da Sigla</label>
                     <input type="text" name="CodSigla" class="form-control" placeholder="Código da Sigla" />
 
-                    <label for="Nome">Tipo da Sigla</label>
-
+                    <label for="Tipo">Tipo da Sigla</label>
                     <select class="form-control" name="Tipo">
-                        <option value="1">Ambos</option>
-                        <option value="2">Mainframe</option>
-                        <option value="3">Distribuída</option>
-                        <option value="4">Outros</option>
+                        <option value="ambos">Ambos</option>
+                        <option value="mainframe">Mainframe</option>
+                        <option value="distribuida">Distribuída</option>
+                        <option value="outros">Outros</option>
                     </select>
 
                     <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
@@ -76,5 +79,27 @@
     </div>
 </div>
 
+@section scripts {
 
+    <script type="text/javascript">
+        function CopiarEdicao(id) {
+            var sigla = {};  
+
+            if (id != "" && id != undefined) {
+                var itemUpdate = $(".row[data-id='" + id + "']");
+
+                sigla.Id = id;
+                sigla.CodSigla = itemUpdate.find("span[data-codsigla]").data("codsigla");
+                sigla.Tipo = itemUpdate.find("span[data-tipo]").data("tipo");
+
+                //popula campos
+                $("input[name='Id']").val(sigla.Id);
+                $("input[name='CodSigla']").val(sigla.CodSigla);
+                $("select[name='Tipo']").val(sigla.Tipo);
+            }                  
+        }
+        
+    </script>
+
+}
 

@@ -8,6 +8,7 @@ namespace Itau.Models
 
     public class Configuracao
     {
+        public int Id { get; set; }
         public string NomeSquad { get; set; }
         public string Proposito { get; set; }        
         public List<Sigla> Siglas { get; set; }
@@ -31,6 +32,7 @@ namespace Itau.Models
     }
     public class DadosPlantao
     {
+        public int Id { get; set; }
         public string Funcionario { get; set; }
         public bool Valido { get; set; }
         public string Plataforma { get; set; }
@@ -39,6 +41,7 @@ namespace Itau.Models
     }
     public class NossoTime
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Principal { get; set; }
         public string Papel { get; set; }
@@ -48,6 +51,7 @@ namespace Itau.Models
     }
     public class AusenciaProgramada
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public DateTime Data { get; set; }
         public string Motivo { get; set; }
@@ -61,6 +65,7 @@ namespace Itau.Models
     }
     public class Ferias
     {
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Tipo { get; set; }
         public DateTime DataInicio { get; set; }
@@ -84,12 +89,14 @@ namespace Itau.Models
     }
     public class Cerimonia
     {
+        public int Id { get; set; }
         public string Descricao { get; set; }
         public string Data { get; set; }
         public string Hora { get; set; }
     }
     public class Sigla
     {
+        public int Id { get; set; }
         public string CodSigla { get; set; }
         public TipoSigla Tipo { get; set; }
     }

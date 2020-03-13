@@ -10,7 +10,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md">
+        <div class="col-md-7">
             <h3>Plantão</h3>
 
             <div class="container">
@@ -34,27 +34,28 @@
 
                 @foreach (Itau.Models.DadosPlantao item in Model)
                 {
-                <div class="row">
-                    <div class="col-sm-3">
-                        <span>@item.Funcionario</span>
+                    <div class="row" data-id="@item.Id">
+                        <div class="col-sm-3">
+                            <span data-funcionario="@item.Funcionario">@item.Funcionario</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span data-datainicio="@item.DataInicio.ToString("dd-MM-yyyy")">@item.DataInicio.ToString("dd-MM-yyyy")</span>
+                        </div>
+                        <div class="col-sm-3">
+                            <span data-datafim="@item.DataFim.ToString("dd-MM-yyyy")">@item.DataFim.ToString("dd-MM-yyyy")</span>
+                        </div>
+                        <div class="col-sm-2">
+                            <span data-plataforma="@item.Plataforma">@item.Plataforma</span>
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="button" class="btn btn-primary mb-1" value="Editar" onclick="javascript:CopiarEdicao('@item.Id')" />
+                            @Html.ActionLink("X", "ExcluirPlantao", "Config", new { equipe = ViewBag.equipe, id = item.Id }, new { @class = "btn btn-primary mb-1" })
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <span>@item.DataInicio.ToString("dd-MM-yyyy")</span>
-                    </div>
-                    <div class="col-sm-3">
-                        <span>@item.DataFim.ToString("dd-MM-yyyy")</span>
-                    </div>
-                    <div class="col-sm-2">
-                        <span>@item.Plataforma</span>
-                    </div>
-                    <div class="col-sm-1">
-                        @Html.ActionLink("X", "ExcluirPlantao", "Config", new { equipe = ViewBag.equipe, nome = item.Plataforma }, new { @class = "btn btn-primary mb-1" })
-                    </div>
-                </div>
                 }
             </div>
         </div>
-        <div class="col-md">
+        <div class="col-md-5">
             <h3>Novo Item</h3>
 
             @using (Html.BeginForm("CriarEditarPlantao",
@@ -62,28 +63,31 @@
                 new { equipe = ViewBag.equipe },
                 FormMethod.Post))
             {
-            <div class="form-group">
-                <label for="Funcionario">Analistas</label>
-                <input type="text" name="Funcionario" class="form-control" placeholder="Nome | Nome" />
+                <div class="form-group">
 
-                <label for="Plataforma">Plataforma</label>
-                <input type="text" name="Plataforma" class="form-control" placeholder="Plataforma" />
+                    <input type="hidden" name="Id" />
 
-                <label for="DataInicio">Data Inicio</label>
-                <input type="text" id="datepickerInicio" name="DataInicio" class="form-control" placeholder="Data Inicio" />
+                    <label for="Funcionario">Analistas</label>
+                    <input type="text" name="Funcionario" class="form-control" placeholder="Nome | Nome" />
 
-                <label for="DataFim">Data Fim</label>
-                <input type="text" id="datepickerFim" name="DataFim" class="form-control" placeholder="Data Fim" />
+                    <label for="Plataforma">Plataforma</label>
+                    <input type="text" name="Plataforma" class="form-control" placeholder="Plataforma" />
 
-                <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+                    <label for="DataInicio">Data Inicio</label>
+                    <input type="text" id="datepickerInicio" name="DataInicio" class="form-control" placeholder="Data Inicio" />
 
-                @if (!ViewData.ModelState.IsValid)
-                {
-                    <div class="alert alert-warning mt-2" role="alert">
-                        Erro ao criar Ausência: @Html.ValidationMessage("Error")
-                    </div>
-                }
-            </div>
+                    <label for="DataFim">Data Fim</label>
+                    <input type="text" id="datepickerFim" name="DataFim" class="form-control" placeholder="Data Fim" />
+
+                    <button type="submit" value="submit" class="btn btn-primary mt-2">Salvar</button>
+
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning mt-2" role="alert">
+                            Erro ao criar Ausência: @Html.ValidationMessage("Error")
+                        </div>
+                    }
+                </div>
             }
 
 
@@ -95,11 +99,34 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {           
+        $(document).ready(function () {
             $("#datepickerInicio").datepicker();
             $("#datepickerFim").datepicker();
         });
-    </script>
+
+        function CopiarEdicao(id) {
+            var plantao = {};
+
+            if (id != "" && id != undefined) {
+                var itemUpdate = $(".row[data-id='" + id + "']");
+
+                plantao.Id = id;
+                plantao.Funcionario = itemUpdate.find("span[data-funcionario]").data("funcionario");
+                plantao.Plataforma = itemUpdate.find("span[data-plataforma]").data("plataforma");
+                plantao.DataInicio = itemUpdate.find("span[data-datainicio]").data("datainicio");
+                plantao.DataFim = itemUpdate.find("span[data-datafim]").data("datafim");
+                
+
+                //popula campos
+                $("input[name='Id']").val(plantao.Id);
+                $("input[name='Funcionario']").val(plantao.Funcionario);
+                $("input[name='Plataforma']").val(plantao.Plataforma);
+                $("input[name='DataInicio']").val(plantao.DataInicio);
+                $("input[name='DataFim']").val(plantao.DataFim);                
+            }
+        }
+
+    </script> 
 
 }
 

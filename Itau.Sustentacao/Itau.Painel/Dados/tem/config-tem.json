@@ -1,12 +1,51 @@
 [
   {
+    "Id": 0,
     "NomeSquad": "Equipe tem",
-    "Proposito": "Proposito tem tbm",
-    "Siglas": [],
+    "Proposito": "Proposito tem tbm né",
+    "Siglas": [
+      {
+        "Id": 1,
+        "CodSigla": "ABC",
+        "Tipo": 4
+      }
+    ],
     "NossoTime": [],
     "AusenciaProgramada": [],
-    "DadosPlantao": [],
-    "Ferias": [],
-    "InfoCerimonias": []
+    "DadosPlantao": [
+      {
+        "Id": 1,
+        "Funcionario": "Rafael",
+        "Valido": false,
+        "Plataforma": "BP4",
+        "DataInicio": "23-03-2020",
+        "DataFim": "30-03-2020"
+      }
+    ],
+    "Ferias": [
+      {
+        "Id": 1,
+        "Nome": "Rafael dos Santos",
+        "Tipo": "Maternidade",
+        "DataInicio": "01-03-2020",
+        "DataFim": "27-03-2020",
+        "DataDisplay": "01/03-27/03",
+        "Meses": null
+      }
+    ],
+    "InfoCerimonias": [
+      {
+        "Id": 1,
+        "Descricao": "Daily",
+        "Data": "Diariamente",
+        "Hora": "10h"
+      },
+      {
+        "Id": 2,
+        "Descricao": "Retro",
+        "Data": "Toda Semana",
+        "Hora": "as 11"
+      }
+    ]
   }
 ]
